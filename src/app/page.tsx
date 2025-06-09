@@ -41,44 +41,46 @@ export default function Home() {
       {/* industry solutions section */}
       <section
         ref={solutionsref}
-        className="relative h-screen bg-center bg-cover lg:bg-[url('/photos/manTouchingGlass.png')] lg:pb-0  bg-white"
+        className="relative h-screen bg-center bg-cover  bg-[url('/photos/manTouchingGlassMobile.png')] lg:bg-[url('/photos/manTouchingGlass.png')] lg:pb-0  bg-white"
       >
-        <div className="flex flex-col lg:max-w-6xl mx-auto">
-          <div className="flex lg:absolute lg:bottom-60 flex-col gap-4">
-            <p className="text-6xl font-semibold text-white">
-              Industry Solutions
-            </p>
-            <p className="text-xl font-medium text-white">
-              Every industry faces unique challenges—and we’re here to meet them{" "}
-              <br />
-              head-on.From streamlining operations to unlocking new revenue{" "}
-              <br />
-              streams, we help industry leaders innovate, adapt, and thrive.
-            </p>
-          </div>
-          <div className="grid lg:absolute lg:bottom-12 lg:grid-cols-4 grid-cols-1 gap-4 text-white font-semibold text-xl">
-            <div className="border-b  border-gray-500 pb-1.5">
-              <p>HealthCare:</p>
-              <p>Powering Better Care</p>
+        <div className="flex flex-col lg:max-w-6xl lg:mx-auto lg:px-0 px-3">
+          <div className="flex flex-col gap-28 lg:gap-24 absolute bottom-12">
+            <div className="flex  flex-col gap-4">
+              <p className="lg:text-6xl text-4xl font-semibold text-white">
+                Industry Solutions
+              </p>
+              <p className="lg:text-xl text-base lg:font-medium text-white">
+                Every industry faces unique challenges—and we’re here to meet
+                them <br className="hidden lg:block" />
+                head-on.From streamlining operations to unlocking new revenue{" "}
+                <br className="hidden lg:block" />
+                streams, we help industry leaders innovate, adapt, and thrive.
+              </p>
             </div>
-            <div className="border-b border-gray-500 pb-1.5">
-              <p>Real Estate:</p>
-              <p>Sell Smarter, Faster</p>
-            </div>
-            <div className="border-b border-gray-500 pb-1.5">
-              <p>Transport:</p>
-              <p>Drive Seamless Movement Care</p>
-            </div>
-            <div className="border-b border-gray-500 pb-1.5">
-              <p>Corporate:</p>
-              <p>Optimize. Innovate. Lead.</p>
+            <div className="grid  lg:grid-cols-4 grid-cols-1 gap-4 text-white font-semibold text-xl">
+              <div className="border-b  border-gray-500 pb-1.5">
+                <p>HealthCare:</p>
+                <p>Powering Better Care</p>
+              </div>
+              <div className="border-b border-gray-500 pb-1.5">
+                <p>Real Estate:</p>
+                <p>Sell Smarter, Faster</p>
+              </div>
+              <div className="border-b border-gray-500 pb-1.5">
+                <p>Transport:</p>
+                <p>Drive Seamless Movement Care</p>
+              </div>
+              <div className="border-b border-gray-500 pb-1.5">
+                <p>Corporate:</p>
+                <p>Optimize. Innovate. Lead.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
       {/* Digital transformation section  */}
       <section className="relative flex flex-col items-center justify-center h-screen lg:pb-0  bg-[#121212]">
-        <p className="text-[#5E646F] text-6xl font-semibold  text-center leading-tight">
+        <p className="text-[#5E646F] lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
           <span className="text-white">Digital Transformation,</span>
           <br /> Workflow & AI Automation, <br /> UX/UI & Digital Product
           Design, <br /> Data Systems & Analytics, <br /> Systems Integration &

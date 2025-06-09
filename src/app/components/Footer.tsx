@@ -1,74 +1,94 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
+import { Copy } from "lucide-react";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowRight } from "lucide-react";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [copied, setCopied] = useState(false);
+  const footerEmail = "info@amlintechnco.com";
+
+  const handleSubmit = () => {
+    console.log("email:", email);
+  };
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(footerEmail);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy!", err);
+    }
+  };
   return (
-    <div className="min-h-screen mx-auto bg-[#08221E] text-white items-center  flex flex-col">
-      <div className="flex-col mx-auto md:mt-14 md:pl-0 pl-3">
-        {/* top side */}
-        <div className="  pt-8 justify-between flex md:flex-row flex-col">
-          {/* left side */}
-          <div className="md:w-1/2">
-            <div className="flex items-center gap-2 mb-1.5">
-              <Image
-                className="dark:invert"
-                src="/svg/logo.svg"
-                alt="ehr logo"
-                width={20}
-                height={20}
-              />
-              <span className="font-medium  text-2xl ">EHR SYSTEM</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-regular leading-tight">
-              The EHR software that does more.
-            </h1>
-            <div className="flex items-center gap-4 pt-6">
-              <Link
-                href="#"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-6 h-6 fill-white" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
-              <Link
-                href="#"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                <Instagram className="w-6 h-6 fill-white text-[#08221E]" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link
-                href="#"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                <Twitter className="w-6 h-6 fill-white" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link
-                href="#"
-                className="text-white/80 hover:text-white transition-colors"
-              >
-                <Facebook className="w-6 h-6 fill-white" />
-                <span className="sr-only">Facebook</span>
-              </Link>
-
-              <Link
-                href="#"
-                className="ml-4 bg-[#00A991] hover:bg-[#3da697] text-white px-4 text-sm py-3 rounded-lg flex items-center gap-2 transition-colors"
-              >
-                Get Started <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
+    <div className="min-h-screen relative mx-auto bg-[#1D1D1D] text-white lg:items-center lg:px-0 px-4 lg:pt-28 pt-14  flex flex-col">
+      <div className="grid lg:grid-cols-3 grid-cols-1  lg:w-3/4">
+        {/* left side */}
+        <div className="flex flex-col gap-6  items-left ">
+          <Image
+            className="lg:block hidden"
+            src="/svg/footerLogo.svg"
+            alt="amlin logo"
+            width={230}
+            height={230}
+          />
+          <Image
+            className="lg:hidden block"
+            src="/svg/footerLogo.svg"
+            alt="amlin logo"
+            width={120}
+            height={120}
+          />
+          <div className="flex gap-2 items-center">
+            <p className="lg:text-2xl text-xl">{footerEmail}</p>
+            <Copy
+              onClick={handleCopy}
+              className="w-4 h-4 hover:cursor-pointer text-gray-200 hover:text-white"
+            />
+            {copied && <span className="text-sm text-green-400">Copied!</span>}
           </div>
-          {/* right side */}
-
+        </div>
+        {/* center */}
+        <div className="flex flex-col gap-6  lg:pt-0 pt-16">
+          <div className="flex flex-col gap-3">
+            <p className="font-semibold lg:text-5xl text-4xl">
+              Stay <br className="hidden lg:block" /> connected
+            </p>
+            <p className="font-medium text-lg text-[#5E646F]">
+              Join our newsletter and stay updated <br /> on the latest trends
+              in digital design
+            </p>
+          </div>
+          <form onSubmit={handleSubmit} className="relative w-full mx-auto">
+            <div className="relative">
+              <Input
+                type="email"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-transparent border-0 border-b-2 border-white rounded-none px-0 py-4 text-white placeholder:text-gray-400 text-lg focus-visible:ring-0 focus-visible:border-white"
+                required
+              />
+              <Button
+                type="submit"
+                size="icon"
+                className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#7563FC] hover:bg-purple-700 hover:cursor-pointer rounded-full w-5 h-5"
+              >
+                <ArrowRight className="w-5 h-5 text-black" />
+                <span className="sr-only">Subscribe</span>
+              </Button>
+            </div>
+          </form>
+        </div>
+        {/* right */}
+        <div className="flex flex-col  lg:items-center lg:pt-0 pt-16">
           <div className="space-y-4  w-1/2 flex flex-col md:items-end md:mt-0 mt-5">
             <div className="flex flex-col items-start md:space-y-5 space-y-3">
               <h2 className="text-xl font-medium text-[#A3A3A3]">
@@ -81,12 +101,7 @@ export function Footer() {
                 >
                   Home
                 </Link>
-                <Link
-                  href="#"
-                  className="text-white/80 hover:text-white text-sm  transition-colors"
-                >
-                  Product
-                </Link>
+
                 <Link
                   href="/about"
                   className="text-white/80 hover:text-white text-sm  transition-colors"
@@ -94,10 +109,16 @@ export function Footer() {
                   About
                 </Link>
                 <Link
-                  href="/faq"
+                  href="/services"
                   className="text-white/80 hover:text-white text-sm  transition-colors"
                 >
-                  FAQ
+                  Services
+                </Link>
+                <Link
+                  href="/solution"
+                  className="text-white/80 hover:text-white text-sm  transition-colors"
+                >
+                  Solution
                 </Link>
                 <Link
                   href="/contact"
@@ -105,37 +126,19 @@ export function Footer() {
                 >
                   Contact
                 </Link>
-                <Link
-                  href="/privacy-policy"
-                  className="text-white/80 hover:text-white text-sm  transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="/terms-of-service"
-                  className="text-white/80 hover:text-white text-sm  transition-colors"
-                >
-                  Terms of Service
-                </Link>
               </nav>
             </div>
           </div>
         </div>
-        <hr className="my-8 border-t border-[#343434] container mx-auto w-full" />
-        <div className="container mx-auto px-4 py-8 ">
-          <div className="text-sm text-[#818285] space-y-2">
-            <p>
-              *EHR System is a healthcare technology product of EHR System, a
-              company duly incorporated in [Your Country] (Incorporation No.
-              [XXXXXX]).
-            </p>
-            <p>
-              Health data management and digital record services are provided by
-              EHR System.
-            </p>
-            <p>© 2025 EHR System. All rights reserved.</p>
-          </div>
-        </div>
+      </div>
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2  w-5/6 ">
+        <Image
+          src="/svg/amlin.svg"
+          alt="amlin text"
+          className="w-full"
+          width={1000}
+          height={1000}
+        />
       </div>
     </div>
   );

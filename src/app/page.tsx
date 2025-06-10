@@ -78,6 +78,54 @@ export default function Home() {
           </div>
         </div>
       </section>
+      {/* testimonial section  */}
+      <section className="relative flex flex-col items-center justify-center min-h-[90vh] lg:pb-0  bg-white">
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <div className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="w-full md:w-1/3 order-2 md:order-1">
+              <div className="relative aspect-square  mx-auto">
+                <Image
+                  src="/photos/portrait-cheerful-black-woman.png"
+                  alt="portrait-cheerful-black-woman"
+                  width={600}
+                  height={600}
+                />
+              </div>
+            </div>
+            <div className="w-full md:w-2/3 space-y-6 gap-2 flex order-1 md:order-2">
+              <Image
+                src="/svg/“.svg"
+                alt="portrait-cheerful-black-woman"
+                width={500}
+                height={500}
+                className="w-6 h-6"
+              />
+              <div>
+                <div className="text-2xl md:text-3xl font-medium leading-snug flex ">
+                  Partnering with Amlin was a game-changer.{" "}
+                  <br className="lg:block hidden" /> In just six months, they
+                  helped us cut system downtime by 30% and doubled our{" "}
+                  <br className="lg:block hidden" />
+                  automation capacity. Their team brought{" "}
+                  <br className="lg:block hidden" /> clarity, speed, and serious
+                  results.
+                </div>
+
+                <p className="text-gray-600 leading-relaxed pt-5">
+                  From idea to execution, we design digital solutions that
+                  perform with purpose—built to engage, convert, and scale with
+                  your goals.
+                </p>
+
+                <div className="mt-5 pt-2 border-t border-gray-200">
+                  <h3 className="font-medium text-lg">Rosina Andor</h3>
+                  <p className="text-gray-600">Tech Lead, Healthcare Partner</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Digital transformation section  */}
       <section className="relative flex flex-col items-center justify-center h-screen lg:pb-0  bg-[#121212]">
         <p className="text-[#5E646F] lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">

@@ -21,7 +21,7 @@ export function Navbar() {
   return (
     <div className="relative">
       <nav className="bg-[#121212] lg:flex lg:justify-center py-6 px-3  w-full ">
-        <div className="flex items-center justify-between lg:max-w-5xl w-full ">
+        <div className="flex items-center justify-between md:max-w-5xl w-full ">
           {/* Logo */}
           <div className=" items-center hidden lg:flex gap-2">
             <Image

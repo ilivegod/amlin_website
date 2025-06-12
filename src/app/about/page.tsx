@@ -2,6 +2,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Challenge from "../components/Challenge";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 
 const images = [
   {
@@ -33,7 +35,7 @@ function About() {
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">
       {/* our mission section */}
       <section className="relative h-[120vh] lg:pb-0  ">
-        <div className="bg-[#121212]   h-1/2">
+        <div className="bg-[#121212] px-4 md:pt-0 pt-16 h-1/2 ">
           <div className="flex flex-col mx-auto max-w-5xl md:pt-12">
             <p className="text-white text-4xl lg:text-6xl font-semibold ">
               Our Mission & Vision
@@ -47,6 +49,10 @@ function About() {
               <br className="md:block hidden" /> solutions that put users first
               and inspire excellence.
             </p>
+            <Button className=" w-40 bg-gradient-to-r py-5 mt-4  from-[#7A5FFF] to-[#04C9A8] rounded-4xl   hover:cursor-pointer">
+              Get in touch
+              <ChevronRight />
+            </Button>
           </div>
         </div>
         <div className="h-1/2 bg-white">
@@ -55,23 +61,30 @@ function About() {
             alt="meeting photo"
             width={1000}
             height={1000}
-            className="w-1/2 md:absolute md:bottom-44 md:right-36"
+            className="w-1/2 md:block hidden md:absolute md:bottom-44 md:right-36"
+          />
+          <Image
+            src="/photos/meetingMobile.png"
+            alt="meeting photo"
+            width={1000}
+            height={1000}
+            className="h-full md:absolute md:bottom-44 md:right-36"
           />
         </div>
       </section>
       {/* our values section */}
-      <section className="relative min-h-screen lg:pb-0  ">
-        <div className="md:max-w-6xl mx-auto">
+      <section className="relative min-h-screen lg:pb-0 md:pt-0 pt-14 ">
+        <div className="md:max-w-6xl mx-auto md:px-0 px-4">
           <p className="text-black text-4xl lg:text-6xl font-semibold ">
             Our Values
           </p>
-          <p className="text-[#5E646F] font-medium text-lg lg:text-xl md:pt-5 pt-14  flex">
+          <p className="text-[#5E646F] font-medium text-lg lg:text-xl pt-5  flex">
             At the core of everything we do are the principles that guide our{" "}
             <br className="md:block hidden" /> work, shape our culture, and
             define how we create value— <br className="md:block hidden" />
             consistently, ethically, and with purpose.
           </p>
-          <div className="flex w-full h-[450px] overflow-hidden md:mt-20">
+          <div className=" w-full h-[450px] overflow-hidden hidden md:flex mt-20">
             {images.map((img, index) => {
               const isHovered = hoveredIndex === index;
               const isOther = hoveredIndex !== null && hoveredIndex !== index;
@@ -104,6 +117,26 @@ function About() {
                 </div>
               );
             })}
+          </div>
+          <div className="md:hidden flex flex-col gap-3">
+            {images.map((img) => (
+              <div key={img.title} className=" relative overflow-hidden">
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  height={1000}
+                  width={1000}
+                  className="object-cover h-[50vh]"
+                />
+
+                <div className="absolute bottom-12 mb-4 left-0 right-0  text-white p-4 text-3xl font-semibold">
+                  {img.title}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0  text-white p-4 text-sm">
+                  {img.description}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

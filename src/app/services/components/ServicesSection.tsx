@@ -54,23 +54,31 @@ const services = [
 
 function ServicesSection() {
   return (
-    <section className="grid md:grid-cols-3 grid-cols-1 min-h-screen md:max-w-6xl md:mx-auto md:py-28 md:-mb-20">
-      {services.map((service) => (
-        <div key={service.number} className="p-10  flex flex-col gap-3 ">
-          <p className="text-[#5E646F] text-sm">/{service.number}</p>
-          <Image
-            src={service.src}
-            alt={service.alt}
-            height={800}
-            width={800}
-            className="w-5 h-5"
-          />
-          <p className="text-xl font-semibold">{service.title}</p>
-          <p className="text-[#5E646F] text-sm max-w-2xl">
-            {service.description}
-          </p>
-        </div>
-      ))}
+    <section className=" min-h-screen md:max-w-6xl md:mx-auto md:py-28 mb-10 md:-mb-20">
+      <p className="text-black md:pb-10  md:pl-10 text-3xl pt-16 px-4 md:px-0 md:text-5xl font-semibold ">
+        Services We Provide
+      </p>
+      <div className="grid md:grid-cols-3 grid-cols-1 md:space-y-10">
+        {services.map((service) => (
+          <div
+            key={service.number}
+            className="md:p-10 px-4 py-10 md:py-0  flex flex-col gap-3 "
+          >
+            <p className="text-[#5E646F] text-sm">/{service.number}</p>
+            <Image
+              src={service.src}
+              alt={service.alt}
+              height={800}
+              width={800}
+              className="w-5 h-5"
+            />
+            <p className="text-xl font-semibold">{service.title}</p>
+            <p className="text-[#5E646F] text-sm max-w-2xl">
+              {service.description}
+            </p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

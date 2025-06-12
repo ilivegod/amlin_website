@@ -1,24 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter", // Optional: to use as a CSS variable
   display: "swap", // Optional: improves rendering
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +27,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body>
         <Navbar />
-        <main className={inter.className}>{children}</main>
+
+        <main className={`${inter.variable} ${playfair.variable} font-sans`}>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

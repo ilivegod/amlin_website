@@ -1,8 +1,6 @@
 "use client";
 
-import { ChevronRight, MoveDown } from "lucide-react";
-import Image from "next/image";
-import { useRef } from "react";
+import { ChevronRight } from "lucide-react";
 
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";

@@ -1,13 +1,11 @@
 "use client";
 
-import { ChevronRight, MoveDown } from "lucide-react";
+import { MoveDown } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import Challenge from "./components/Challenge";
 
 export default function Home() {
@@ -42,10 +40,10 @@ export default function Home() {
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">
       {/* hero section */}
       <section className="relative h-screen lg:pb-0  bg-[#121212]">
-        <div className="lg:max-w-5xl mx-auto pt-28 lg:px-0 px-3  flex flex-col">
+        <div className="lg:max-w-5xl mx-auto pt-28 lg:px-0 px-3  flex flex-col ">
           <p className="text-white text-4xl lg:text-6xl font-semibold ">
-            Powerings{" "}
-            <span className="relative inline-block bg-gradient-to-r from-[#7A5FFF] to-[#04C9A8] bg-clip-text text-transparent after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-[#7A5FFF] after:to-[#04C9A8]">
+            Powering{" "}
+            <span className="relative font-medium font-playfair italic inline-block bg-gradient-to-r from-[#7A5FFF] to-[#04C9A8] bg-clip-text text-transparent after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-[#7A5FFF] after:to-[#04C9A8]">
               Business
             </span>
             <br /> Growth Through Smart <br /> Digital Transformation

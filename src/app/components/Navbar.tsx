@@ -20,7 +20,7 @@ export function Navbar() {
 
   return (
     <div className="relative">
-      <nav className="bg-[#121212] lg:flex lg:justify-center py-6 px-3  w-full ">
+      <nav className="bg-[#121212] md:flex lg:justify-center py-5 px-3  w-full ">
         <div className="flex items-center justify-between md:max-w-5xl w-full ">
           {/* Logo */}
           <div className=" items-center hidden lg:flex gap-2">
@@ -32,9 +32,9 @@ export function Navbar() {
               height={180}
             />
           </div>
-          <div className="flex items-center lg:hidden gap-2">
+          <div className="flex items-center md:hidden gap-2">
             <Image
-              className="dark:invert"
+              className="dark:invert h-9 w-auto"
               src="/svg/logo.svg"
               alt="ehr logo"
               width={130}
@@ -43,13 +43,13 @@ export function Navbar() {
           </div>
 
           {/* Hamburger (mobile only) */}
-          <div className="lg:hidden">
+          <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="text-[#0E121B] focus:outline-none"
             >
               {menuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-white" />
               ) : (
                 <Image
                   src="/svg/hamburgerMenu.svg"

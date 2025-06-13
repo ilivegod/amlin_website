@@ -21,21 +21,6 @@ export default function Home() {
 
   type FormValues = z.infer<typeof contactSchema>;
 
-  const form = useForm({
-    defaultValues: {
-      name: "",
-      email: "",
-      projectDetails: "",
-    } as FormValues,
-    validators: {
-      onSubmit: contactSchema,
-      onChange: contactSchema,
-    },
-    onSubmit: async ({ value }) => {
-      console.log(value);
-    },
-  });
-
   return (
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">
       {/* hero section */}

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Image from "next/image";
-import { ArrowRight, X } from "lucide-react";
+import { X } from "lucide-react";
 import { useState } from "react";
 
 const links = [

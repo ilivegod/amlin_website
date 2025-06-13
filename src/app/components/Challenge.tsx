@@ -37,7 +37,8 @@ function Challenge() {
       <div className="md:flex block md:w-2/3">
         <div className=" md:w-4/6 flex flex-col gap-6">
           <p className="font-semibold md:text-6xl text-3xl">
-            We're l👀king for <br className="md:block hidden" /> new challenge
+            We&apos;re l👀king for <br className="md:block hidden" /> new
+            challenge
           </p>
 
           <p className="text-[#5E646F] font-medium md:text-base text-sm">

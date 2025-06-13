@@ -4,22 +4,10 @@ import { MoveDown } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
-import { useForm } from "@tanstack/react-form";
-import { z } from "zod";
 import Challenge from "./components/Challenge";
 
 export default function Home() {
   const solutionsref = useRef<HTMLDivElement | null>(null);
-
-  const contactSchema = z.object({
-    name: z.string().min(3, { message: "Please enter a valid name" }),
-    email: z.string().email().min(3, { message: "Please enter a valid email" }),
-    projectDetails: z
-      .string()
-      .min(3, { message: "Please enter your project details" }),
-  });
-
-  type FormValues = z.infer<typeof contactSchema>;
 
   return (
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">

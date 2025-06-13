@@ -129,13 +129,25 @@ export default function Home() {
         </div>
       </section>
       {/* Digital transformation section  */}
-      <section className="relative flex flex-col items-center justify-center h-screen md:pb-0  bg-[#121212] md:">
-        <p className="text-[#5E646F] lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
-          <span className="text-white">Digital Transformation,</span>
-          <br /> Workflow & AI Automation, <br /> UX/UI & Digital Product
-          Design, <br /> Data Systems & Analytics, <br /> Systems Integration &
-          Cloud <br />
-          Engineering, <br /> Cybersecurity & Compliance
+      <section className=" flex flex-col items-center justify-center h-screen md:pb-0  bg-[#121212] ">
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110 hover:cursor-pointer transition ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          Digital Transformation,
+        </p>
+
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110  hover:cursor-pointer ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          Workflow & AI Automation,
+        </p>
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110  hover:cursor-pointer ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          UX/UI & Digital Product Design,
+        </p>
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110  hover:cursor-pointer ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          Data Systems & Analytics,
+        </p>
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110  hover:cursor-pointer ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          Systems Integration & Cloud <br /> Engineering,
+        </p>
+        <p className="text-[#5E646F] hover:text-white transform hover:scale-110  hover:cursor-pointer ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
+          Cybersecurity & Compliance
         </p>
       </section>
       {/* new challenge section  */}

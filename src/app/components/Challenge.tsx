@@ -6,7 +6,6 @@ import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import localFont from "next/font/local";
 
 function Challenge() {
   const contactSchema = z.object({

@@ -6,6 +6,7 @@ import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import localFont from "next/font/local";
 
 function Challenge() {
   const contactSchema = z.object({
@@ -36,12 +37,14 @@ function Challenge() {
     <section className="relative flex flex-col md:px-0 px-3 md:pt-0 pt-16 items-center md:justify-center min-h-[80vh] lg:pb-0  bg-white">
       <div className="md:flex block md:w-2/3">
         <div className=" md:w-4/6 flex flex-col gap-6">
-          <p className="font-semibold md:text-6xl text-3xl">
+          <p className={`font-semibold  md:text-6xl text-3xl`}>
             We&apos;re l👀king for <br className="md:block hidden" /> new
             challenge
           </p>
 
-          <p className="text-[#5E646F] font-medium md:text-base text-sm">
+          <p
+            className={`text-[#5E646F] font-inter font-medium md:text-base text-sm`}
+          >
             We thrive on solving complex problems and turning big ideas into
             bold <br className="md:block hidden" /> results. If you’re
             navigating uncharted territory or aiming for something{" "}

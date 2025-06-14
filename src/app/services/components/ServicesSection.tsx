@@ -16,7 +16,7 @@ const services = [
     alt: "Workflow & AI Automation icon ",
     title: "Workflow & AI Automation",
     description:
-      "We streamline repetitive processes and unlock efficiency with intelligent automation and AI—freeing teams to focus on high-value, strategic work.",
+      "We streamline repetitive processes and unlock efficiency with intelligent automation and AI, freeing teams to focus on high-value, strategic work.",
   },
   {
     number: "03",
@@ -24,7 +24,7 @@ const services = [
     alt: "UX/UI & Product Design icon ",
     title: "UX/UI & Product Design",
     description:
-      "We craft intuitive user experiences and clean, conversion-driven interfaces that make digital products not only usable—but unforgettable.",
+      "We craft intuitive user experiences and clean, conversion-driven interfaces that make digital products not only usable, but unforgettable.",
   },
   {
     number: "04",
@@ -32,7 +32,7 @@ const services = [
     alt: "Data Systems & Analytics icon ",
     title: "Data Systems & Analytics",
     description:
-      "We design data pipelines, dashboards, and analytics tools that turn raw data into real insights—fueling better decisions and smarter strategies.",
+      "We design data pipelines, dashboards, and analytics tools that turn raw data into real insights fueling better decisions and smarter strategies.",
   },
   {
     number: "05",
@@ -48,17 +48,17 @@ const services = [
     alt: "Cybersecurity & Compliance icon ",
     title: "Cybersecurity & Compliance",
     description:
-      "We secure your digital assets with advanced protection and ensure your systems meet compliance standards—reducing risk and boosting resilience.",
+      "We secure your digital assets with advanced protection and ensure your systems meet compliance standards, reducing risk and boosting resilience.",
   },
 ];
 
 function ServicesSection() {
   return (
     <section className=" min-h-screen md:max-w-6xl md:mx-auto md:py-28 mb-10 md:-mb-20">
-      <p className="text-black md:pb-10  md:pl-10 text-3xl pt-16 px-4 md:px-0 md:text-5xl font-semibold ">
+      <p className="text-black md:pb-10 font-polysans md:pl-10 text-3xl pt-16 px-4 md:px-0 md:text-5xl font-semibold ">
         Services We Provide
       </p>
-      <div className="grid md:grid-cols-3 grid-cols-1 md:space-y-10">
+      <div className="grid md:grid-cols-3 font-inter grid-cols-1 md:space-y-10">
         {services.map((service) => (
           <div
             key={service.number}

@@ -14,7 +14,7 @@ const solutionss = [
     alt: "realEstate Image ",
     title: "Real Estate",
     description:
-      "We help real estate businesses modernize operations with tailored digital solutions. Our software supports property listing and management, virtual tours, tenant portals, digital contracts, and CRM systems—everything you need to simplify transactions and improve customer experience. From residential agencies to commercial developers, we deliver tools that give you a competitive edge in a fast-paced market.",
+      "We help real estate businesses modernize operations with tailored digital solutions. Our software supports property listing and management, virtual tours, tenant portals, digital contracts, and CRM systems, everything you need to simplify transactions and improve customer experience. From residential agencies to commercial developers, we deliver tools that give you a competitive edge in a fast-paced market.",
   },
   {
     src: "/photos/road.png",
@@ -36,17 +36,17 @@ function SolutionsThatWork() {
   return (
     <section className="relative md:max-w-6xl md:mx-auto md:px-0 px-4 lg:pb-0 pt-20 md:pt-0  ">
       <div className="flex flex-col mb-24  md:pt-20">
-        <p className="text-black text-4xl lg:text-6xl font-semibold ">
+        <p className="text-black font-polysans text-4xl lg:text-6xl font-semibold ">
           Solutions that work <br className="hidden md:block" /> for our
           partners
         </p>
-        <p className="text-[#5E646F] font-medium text-lg lg:text-xl pt-5  flex">
-          We don’t just build software — we craft industry-specific solutions{" "}
+        <p className="text-[#5E646F] font-inter font-medium text-lg lg:text-xl pt-5  flex">
+          We don’t just build software, we craft industry-specific solutions{" "}
           <br className="hidden md:block" /> that solve real problems and
           deliver measurable impact.
         </p>
       </div>
-      <div className="space-y-20 md:space-y-10">
+      <div className="space-y-20 font-inter md:space-y-10">
         {solutionss.map((item, index) => {
           const isOdd = index % 2 === 1;
 

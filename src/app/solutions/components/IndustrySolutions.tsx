@@ -3,14 +3,14 @@ import React from "react";
 
 function IndustrySolutions() {
   return (
-    <section className="relative md:h-[120vh] lg:pb-0  ">
-      <div className="bg-[#121212] px-4 md:pt-0 pt-16 h-1/2 ">
-        <div className="flex flex-col mx-auto max-w-5xl md:pt-12 pb-16 md:pb-0">
-          <p className="text-white text-4xl lg:text-6xl font-semibold ">
+    <section className="relative md:min-h-[120vh] lg:pb-0  ">
+      <div className="bg-[#121212]  px-4 md:pt-20 pt-16 md:pb-28 ">
+        <div className="flex flex-col mx-auto max-w-6xl md:pt-12 pb-16 md:pb-0">
+          <p className="text-white font-polysans text-4xl lg:text-6xl font-semibold ">
             Industry Solutions
           </p>
-          <p className="text-white font-medium text-lg lg:text-xl md:pt-5 pt-14  flex">
-            Every industry faces unique challenges—and we’re here to meet them
+          <p className="text-white font-medium font-inter text-lg lg:text-xl md:pt-5 pt-14  flex">
+            Every industry faces unique challenges, and we’re here to meet them
             head-on. <br className="md:block hidden" /> At Amlin, we go beyond
             one-size-fits-all solutions. We partner with organizations{" "}
             <br className="md:block hidden" /> to understand their core
@@ -20,14 +20,16 @@ function IndustrySolutions() {
           </p>
         </div>
       </div>
-      <div className="h-1/2 bg-white">
-        <Image
-          src="/photos/manDoingAnimation.png"
-          alt="meeting photo"
-          width={1000}
-          height={1000}
-          className="max-w-6xl md:block hidden md:absolute md:bottom-20 left-1/2 transform -translate-x-1/2"
-        />
+      <div className="md:bg-[linear-gradient(to_bottom,#121212_50%,white_50%)]  ">
+        <div className="hidden md:flex mx-auto md:max-w-6xl">
+          <Image
+            src="/photos/manDoingAnimation.png"
+            alt="meeting photo"
+            width={1000}
+            height={1000}
+            className=" w-full"
+          />
+        </div>
         <Image
           src="/photos/manDoingAnimationMobile.png"
           alt="meeting photo"

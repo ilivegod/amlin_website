@@ -8,7 +8,7 @@ const images = [
     alt: "Innovation Image ",
     title: "Innovation",
     description:
-      "At the core of everything we do are the principles that guide our work, shape our culture, and define how we create value—consistently, ethically, and with purpose.",
+      "At the core of everything we do are the principles that guide our work, shape our culture, and define how we create value consistently, ethically, and with purpose.",
   },
   {
     src: "/photos/manWorking.png",
@@ -22,7 +22,7 @@ const images = [
     alt: "Excellence Image ",
     title: "Excellence",
     description:
-      "We hold ourselves to the highest standards—delivering quality, precision, and performance in every product, partnership, and line of code.",
+      "We hold ourselves to the highest standards delivering quality, precision, and performance in every product, partnership, and line of code.",
   },
 ];
 
@@ -31,13 +31,13 @@ function OurValues() {
   return (
     <section className="relative min-h-screen lg:pb-0 md:pt-0 pt-14 ">
       <div className="md:max-w-6xl mx-auto md:px-0 px-4">
-        <p className="text-black text-4xl lg:text-6xl font-semibold ">
+        <p className="text-black font-polysans text-4xl lg:text-6xl font-semibold ">
           Our Values
         </p>
-        <p className="text-[#5E646F] font-medium text-lg lg:text-xl pt-5  flex">
+        <p className="text-[#5E646F] font-medium font-inter text-lg lg:text-xl pt-5  flex">
           At the core of everything we do are the principles that guide our{" "}
           <br className="md:block hidden" /> work, shape our culture, and define
-          how we create value— <br className="md:block hidden" />
+          how we create value <br className="md:block hidden" />
           consistently, ethically, and with purpose.
         </p>
         <div className=" w-full h-[450px] overflow-hidden hidden md:flex mt-20">
@@ -85,10 +85,10 @@ function OurValues() {
                 className="object-cover h-[50vh]"
               />
 
-              <div className="absolute bottom-12 mb-4 left-0 right-0  text-white p-4 text-3xl font-semibold">
+              <div className="absolute bottom-12 font-inter mb-4 left-0 right-0  text-white p-4 text-3xl font-semibold">
                 {img.title}
               </div>
-              <div className="absolute bottom-0 left-0 right-0  text-white p-4 text-sm">
+              <div className="absolute bottom-0 font-inter left-0 right-0  text-white p-4 text-sm">
                 {img.description}
               </div>
             </div>

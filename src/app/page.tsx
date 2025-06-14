@@ -13,27 +13,31 @@ export default function Home() {
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">
       {/* hero section */}
       <section className="relative h-screen lg:pb-0  bg-[#121212]">
-        <div className="lg:max-w-5xl mx-auto pt-28 lg:px-0 px-3  flex flex-col ">
-          <p className="text-white text-4xl lg:text-6xl font-semibold ">
+        <div className="md:max-w-6xl mx-auto pt-28 lg:px-0 px-3  flex flex-col ">
+          <p
+            className={`text-white font-polysans text-4xl lg:text-6xl font-semibold `}
+          >
             Powering{" "}
             <span className="relative font-medium font-playfair italic inline-block bg-gradient-to-r from-[#7A5FFF] to-[#04C9A8] bg-clip-text text-transparent after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-[#7A5FFF] after:to-[#04C9A8]">
               Business
             </span>
             <br /> Growth Through Smart <br /> Digital Transformation
           </p>
-          <p className="text-white font-medium text-lg lg:text-xl lg:pt-16 pt-14 justify-end  flex">
+          <p
+            className={`text-white font-inter font-medium text-lg lg:text-xl lg:pt-16 pt-14 justify-end  flex`}
+          >
             We streamline operations, unify fragmented systems, and help
             businesses <br className="lg:block hidden" /> scale with intelligent
             digital solutions that meet global standards.
           </p>
-          <div className="justify-end flex">
+          <div className="justify-end flex ">
             <button
               onClick={() =>
                 solutionsref.current?.scrollIntoView({
                   behavior: "smooth",
                 })
               }
-              className="rounded-full lg:w-28 w-20 lg:h-28 h-20 flex items-center lg:mr-0 mr-4 justify-center border border-white lg:mt-20 mt-32 hover:cursor-pointer hover:border-8 transition-all duration-500 ease-in-out"
+              className="rounded-full lg:w-28 w-20 lg:h-28 h-20 flex items-center lg:mr-0 mr-4 justify-center border border-white  mt-32 hover:cursor-pointer hover:border-8 transition-all duration-500 ease-in-out"
             >
               <MoveDown className="lg:w-12 w-10 lg:h-12 h-10 text-white" />
             </button>
@@ -48,18 +52,24 @@ export default function Home() {
         <div className="flex flex-col lg:max-w-6xl lg:mx-auto lg:px-0 px-3">
           <div className="flex flex-col gap-28 lg:gap-24 absolute bottom-12">
             <div className="flex  flex-col gap-4">
-              <p className="lg:text-6xl text-4xl font-semibold text-white">
+              <p
+                className={`lg:text-6xl text-4xl font-semibold font-polysans text-white`}
+              >
                 Industry Solutions
               </p>
-              <p className="lg:text-xl text-base lg:font-medium text-white">
-                Every industry faces unique challenges—and we’re here to meet
+              <p
+                className={`lg:text-xl text-base font-inter lg:font-medium text-white`}
+              >
+                Every industry faces unique challenges and we’re here to meet
                 them <br className="hidden lg:block" />
                 head-on.From streamlining operations to unlocking new revenue{" "}
                 <br className="hidden lg:block" />
                 streams, we help industry leaders innovate, adapt, and thrive.
               </p>
             </div>
-            <div className="grid  lg:grid-cols-4 grid-cols-1 gap-4 text-white font-semibold text-xl">
+            <div
+              className={`grid font-inter  lg:grid-cols-4 grid-cols-1 gap-4 text-white font-semibold text-xl`}
+            >
               <div className="border-b  border-gray-500 pb-1.5">
                 <p>HealthCare:</p>
                 <p>Powering Better Care</p>
@@ -102,8 +112,10 @@ export default function Home() {
                 height={500}
                 className="w-6 h-6"
               />
-              <div>
-                <div className="text-2xl md:text-3xl font-medium leading-snug flex ">
+              <div className={`font-inter  `}>
+                <div
+                  className={`text-2xl md:text-3xl font-medium leading-snug flex `}
+                >
                   Partnering with Amlin was a game-changer.{" "}
                   <br className="lg:block hidden" /> In just six months, they
                   helped us cut system downtime by 30% and doubled our{" "}
@@ -115,7 +127,7 @@ export default function Home() {
 
                 <p className="text-gray-600 leading-relaxed pt-5">
                   From idea to execution, we design digital solutions that
-                  perform with purpose—built to engage, convert, and scale with
+                  perform with purpose built to engage, convert, and scale with
                   your goals.
                 </p>
 
@@ -129,7 +141,9 @@ export default function Home() {
         </div>
       </section>
       {/* Digital transformation section  */}
-      <section className=" flex flex-col items-center justify-center h-screen md:pb-0  bg-[#121212] ">
+      <section
+        className={` font-inter   flex flex-col items-center justify-center h-screen md:pb-0  bg-[#121212] `}
+      >
         <p className="text-[#5E646F] hover:text-white transform hover:scale-110 hover:cursor-pointer transition ease-in-out duration-200 lg:text-6xl text-4xl font-semibold lg:px-0 px-3 text-center leading-tight">
           Digital Transformation,
         </p>

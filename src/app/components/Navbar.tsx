@@ -20,8 +20,8 @@ export function Navbar() {
 
   return (
     <div className="relative">
-      <nav className="bg-[#121212] md:flex lg:justify-center py-5 px-3  w-full ">
-        <div className="flex items-center justify-between md:max-w-5xl w-full ">
+      <nav className="bg-[#121212] md:flex font-inter md:justify-center py-5 px-3  w-full ">
+        <div className="flex items-center justify-between md:max-w-6xl w-full ">
           {/* Logo */}
           <div className=" items-center hidden lg:flex gap-2">
             <Image
@@ -35,7 +35,7 @@ export function Navbar() {
           <div className="flex items-center md:hidden gap-2">
             <Image
               className="dark:invert h-9 w-auto"
-              src="/svg/logo.svg"
+              src="/photos/logo.png"
               alt="ehr logo"
               width={130}
               height={130}

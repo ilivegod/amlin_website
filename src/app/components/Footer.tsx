@@ -47,7 +47,7 @@ export function Footer() {
             height={120}
           />
           <div className="flex gap-2 items-center">
-            <p className="lg:text-2xl text-xl">{footerEmail}</p>
+            <p className="lg:text-2xl font-inter text-xl">{footerEmail}</p>
             <Copy
               onClick={handleCopy}
               className="w-4 h-4 hover:cursor-pointer text-gray-200 hover:text-white"
@@ -58,10 +58,10 @@ export function Footer() {
         {/* center */}
         <div className="flex flex-col gap-6  lg:pt-0 pt-16">
           <div className="flex flex-col gap-3">
-            <p className="font-semibold lg:text-5xl text-4xl">
+            <p className="font-semibold font-polysans lg:text-5xl text-4xl">
               Stay <br className="hidden lg:block" /> connected
             </p>
-            <p className="font-medium text-lg text-[#5E646F]">
+            <p className="font-medium font-inter text-lg text-[#5E646F]">
               Join our newsletter and stay updated <br /> on the latest trends
               in digital design
             </p>
@@ -90,8 +90,8 @@ export function Footer() {
         {/* right */}
         <div className="flex flex-col  lg:items-center lg:pt-0 pt-16">
           <div className="space-y-4  w-1/2 flex flex-col md:items-end md:mt-0 mt-5">
-            <div className="flex flex-col items-start md:space-y-5 space-y-3">
-              <h2 className="text-xl font-medium text-[#A3A3A3]">
+            <div className="flex flex-col font-inter items-start md:space-y-5 space-y-3">
+              <h2 className="text-xl  font-medium text-[#A3A3A3]">
                 Quick Links
               </h2>
               <nav className="flex flex-col space-y-3">
@@ -115,10 +115,10 @@ export function Footer() {
                   Services
                 </Link>
                 <Link
-                  href="/solution"
+                  href="/solutions"
                   className="text-white/80 hover:text-white text-sm  transition-colors"
                 >
-                  Solution
+                  Solutions
                 </Link>
                 <Link
                   href="/contact"

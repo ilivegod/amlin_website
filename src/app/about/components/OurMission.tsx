@@ -7,7 +7,7 @@ function OurMission() {
   return (
     <section className="relative min-h-[120vh] lg:pb-0  ">
       <div className="bg-[#121212] px-4 md:pt-0 pt-16 h-1/2 ">
-        <div className="flex flex-col mx-auto max-w-6xl md:pb-16 md:pt-12">
+        <div className="flex flex-col mx-auto max-w-6xl pb-16 md:pt-12">
           <p className="text-white text-4xl font-polysans lg:text-6xl font-semibold ">
             Our Mission & Vision
           </p>

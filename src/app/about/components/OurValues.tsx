@@ -62,7 +62,7 @@ function OurValues() {
                   fill
                   className="object-cover"
                 />
-                <div className="absolute bottom-12 left-0 right-0   text-white p-4 text-3xl font-semibold">
+                <div className="absolute bottom-16 left-0 right-0   text-white p-4 text-3xl font-semibold">
                   {img.title}
                 </div>
                 {isHovered && (
@@ -85,11 +85,9 @@ function OurValues() {
                 className="object-cover h-[50vh]"
               />
 
-              <div className="absolute bottom-12 font-inter mb-4 left-0 right-0  text-white p-4 text-3xl font-semibold">
-                {img.title}
-              </div>
-              <div className="absolute bottom-0 font-inter left-0 right-0  text-white p-4 text-sm">
-                {img.description}
+              <div className="absolute bottom-0 font-inter left-0 right-0 text-white p-4">
+                <p className="text-3xl font-semibold mb-2">{img.title}</p>
+                <p className="text-sm">{img.description}</p>
               </div>
             </div>
           ))}

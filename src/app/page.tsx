@@ -21,7 +21,8 @@ export default function Home() {
             <span className="relative font-medium font-playfair italic inline-block bg-gradient-to-r from-[#7A5FFF] to-[#04C9A8] bg-clip-text text-transparent after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-gradient-to-r after:from-[#7A5FFF] after:to-[#04C9A8]">
               Business
             </span>
-            <br /> Growth Through Smart <br /> Digital Transformation
+            <br /> Growth Through Smart <br className="md:block hidden" />{" "}
+            Digital Transformation
           </p>
           <p
             className={`text-white font-inter font-medium text-lg lg:text-xl lg:pt-16 pt-14 justify-end  flex`}

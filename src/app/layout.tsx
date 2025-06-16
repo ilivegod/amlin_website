@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
+  style: "italic",
 });
 
 const polysans = localFont({

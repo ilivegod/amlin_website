@@ -29,12 +29,12 @@ const images = [
 function OurValues() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   return (
-    <section className="relative min-h-screen lg:pb-0 md:pt-0 pt-14 ">
+    <section className="relative min-h-screen md:pb-0 md:pt-0 pt-14 ">
       <div className="md:max-w-6xl mx-auto md:px-0 px-4">
-        <p className="text-black font-polysans text-4xl lg:text-6xl font-semibold ">
+        <p className="text-black font-polysans text-4xl md:text-6xl font-semibold ">
           Our Values
         </p>
-        <p className="text-[#5E646F] font-medium font-inter text-lg lg:text-xl pt-5  flex">
+        <p className="text-[#5E646F] font-medium font-inter text-lg md:text-xl pt-5  flex">
           At the core of everything we do are the principles that guide our{" "}
           <br className="md:block hidden" /> work, shape our culture, and define
           how we create value <br className="md:block hidden" />

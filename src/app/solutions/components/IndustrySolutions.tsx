@@ -3,13 +3,13 @@ import React from "react";
 
 function IndustrySolutions() {
   return (
-    <section className="relative md:min-h-[120vh] lg:pb-0  ">
+    <section className="relative md:min-h-[120vh] md:pb-0  ">
       <div className="bg-[#121212]  px-4 md:pt-20 pt-16 md:pb-28 ">
         <div className="flex flex-col mx-auto max-w-6xl md:pt-12 pb-16 md:pb-0">
-          <p className="text-white font-polysans text-4xl lg:text-6xl font-semibold ">
+          <p className="text-white font-polysans text-4xl md:text-6xl font-semibold ">
             Industry Solutions
           </p>
-          <p className="text-white font-medium font-inter text-lg lg:text-xl md:pt-5 pt-14  flex">
+          <p className="text-white font-medium font-inter text-lg md:text-xl md:pt-5 pt-14  flex">
             Every industry faces unique challenges, and we’re here to meet them
             head-on. <br className="md:block hidden" /> At Amlin, we go beyond
             one-size-fits-all solutions. We partner with organizations{" "}

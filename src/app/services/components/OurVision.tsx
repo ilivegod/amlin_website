@@ -5,14 +5,14 @@ import React from "react";
 
 function OurVision() {
   return (
-    <section className="relative min-h-[90vh] flex md:flex-row flex-col  lg:pb-0  bg-[#121212]">
+    <section className="relative min-h-[90vh] flex md:flex-row flex-col  md:pb-0  bg-[#121212]">
       <div className=" px-4 md:pt-0  pt-14 md:w-1/2  flex flex-col items-center justify-center">
         <div className="flex flex-col md:mx-auto md:pl-48 ">
-          <p className="text-white font-polysans text-4xl lg:text-6xl font-semibold ">
+          <p className="text-white font-polysans text-4xl md:text-6xl font-semibold ">
             Your Vision. <br className="md:block hidden" /> Our{" "}
             <br className="block md:hidden" /> Expertise.
           </p>
-          <p className="text-white font-inter font-medium text-lg lg:text-xl md:pt-10 pt-14  flex">
+          <p className="text-white font-inter font-medium text-lg md:text-xl md:pt-10 pt-14  flex">
             We design and develop powerful digital solutions that solve
             <br className="md:block hidden" />
             real business problems. Whether you’re starting from

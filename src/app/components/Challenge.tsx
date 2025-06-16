@@ -33,7 +33,7 @@ function Challenge() {
     },
   });
   return (
-    <section className="relative flex flex-col md:px-0 px-3 md:pt-0 pt-16 items-center md:justify-center min-h-[80vh] lg:pb-0  bg-white">
+    <section className="relative flex flex-col md:px-0 px-3 md:pt-0 pt-16 items-center md:justify-center min-h-[80vh] md:pb-0  bg-white">
       <div className="md:flex block md:w-2/3">
         <div className=" md:w-4/6 flex flex-col gap-6">
           <p className={`font-semibold  md:text-6xl text-3xl`}>

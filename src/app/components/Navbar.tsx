@@ -23,7 +23,7 @@ export function Navbar() {
       <nav className="bg-[#121212] md:flex font-inter md:justify-center py-5 px-3  w-full ">
         <div className="flex items-center justify-between md:max-w-6xl w-full ">
           {/* Logo */}
-          <div className=" items-center hidden lg:flex gap-2">
+          <div className=" items-center hidden md:flex gap-2">
             <Image
               className="dark:invert"
               src="/svg/logo.svg"
@@ -62,7 +62,7 @@ export function Navbar() {
           </div>
 
           {/* Links (desktop only) */}
-          <ul className="hidden lg:flex gap-5 items-center ">
+          <ul className="hidden md:flex gap-5 items-center ">
             {links.map(({ href, label }) => (
               <li key={href} className="list-none">
                 <Link
@@ -81,7 +81,7 @@ export function Navbar() {
 
         {/* Dropdown absolutely positioned */}
         {menuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white z-40 shadow-lg p-4 space-y-4 lg:hidden">
+          <div className="absolute top-full left-0 w-full bg-white z-40 shadow-lg p-4 space-y-4 md:hidden">
             <ul className="flex flex-col gap-3">
               {links.map(({ href, label }) => (
                 <li key={href} className="list-none">

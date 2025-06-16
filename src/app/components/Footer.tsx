@@ -28,26 +28,26 @@ export function Footer() {
     }
   };
   return (
-    <div className="min-h-screen relative mx-auto bg-[#1D1D1D] text-white lg:items-center lg:px-0 px-4 lg:pt-28 pt-14  flex flex-col">
-      <div className="grid lg:grid-cols-3 grid-cols-1  lg:w-3/4">
+    <div className="min-h-screen relative mx-auto bg-[#1D1D1D] text-white md:items-center md:px-0 px-4 md:pt-28 pt-14  flex flex-col">
+      <div className="grid md:grid-cols-3 grid-cols-1  md:w-3/4">
         {/* left side */}
         <div className="flex flex-col gap-6  items-left ">
           <Image
-            className="lg:block hidden"
+            className="md:block hidden"
             src="/svg/footerLogo.svg"
             alt="amlin logo"
             width={230}
             height={230}
           />
           <Image
-            className="lg:hidden block"
+            className="md:hidden block"
             src="/svg/footerLogo.svg"
             alt="amlin logo"
             width={120}
             height={120}
           />
           <div className="flex gap-2 items-center">
-            <p className="lg:text-2xl font-inter text-xl">{footerEmail}</p>
+            <p className="md:text-2xl font-inter text-xl">{footerEmail}</p>
             <Copy
               onClick={handleCopy}
               className="w-4 h-4 hover:cursor-pointer text-gray-200 hover:text-white"
@@ -56,10 +56,10 @@ export function Footer() {
           </div>
         </div>
         {/* center */}
-        <div className="flex flex-col gap-6  lg:pt-0 pt-16">
+        <div className="flex flex-col gap-6  md:pt-0 pt-16">
           <div className="flex flex-col gap-3">
-            <p className="font-semibold font-polysans lg:text-5xl text-4xl">
-              Stay <br className="hidden lg:block" /> connected
+            <p className="font-semibold font-polysans md:text-5xl text-4xl">
+              Stay <br className="hidden md:block" /> connected
             </p>
             <p className="font-medium font-inter text-lg text-[#5E646F]">
               Join our newsletter and stay updated <br /> on the latest trends
@@ -88,7 +88,7 @@ export function Footer() {
           </form>
         </div>
         {/* right */}
-        <div className="flex flex-col  lg:items-center lg:pt-0 pt-16">
+        <div className="flex flex-col  md:items-center md:pt-0 pt-16">
           <div className="space-y-4  w-1/2 flex flex-col md:items-end md:mt-0 mt-5">
             <div className="flex flex-col font-inter items-start md:space-y-5 space-y-3">
               <h2 className="text-xl  font-medium text-[#A3A3A3]">

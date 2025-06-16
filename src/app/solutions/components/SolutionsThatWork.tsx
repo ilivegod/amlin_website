@@ -34,13 +34,13 @@ const solutionss = [
 
 function SolutionsThatWork() {
   return (
-    <section className="relative md:max-w-6xl md:mx-auto md:px-0 px-4 lg:pb-0 pt-20 md:pt-0  ">
+    <section className="relative md:max-w-6xl md:mx-auto md:px-0 px-4 md:pb-0 pt-20 md:pt-0  ">
       <div className="flex flex-col mb-24  md:pt-20">
-        <p className="text-black font-polysans text-4xl lg:text-6xl font-semibold ">
+        <p className="text-black font-polysans text-4xl md:text-6xl font-semibold ">
           Solutions that work <br className="hidden md:block" /> for our
           partners
         </p>
-        <p className="text-[#5E646F] font-inter font-medium text-lg lg:text-xl pt-5  flex">
+        <p className="text-[#5E646F] font-inter font-medium text-lg md:text-xl pt-5  flex">
           We don’t just build software, we craft industry-specific solutions{" "}
           <br className="hidden md:block" /> that solve real problems and
           deliver measurable impact.

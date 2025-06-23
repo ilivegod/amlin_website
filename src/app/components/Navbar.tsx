@@ -11,7 +11,7 @@ const links = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/solutions", label: "Solutions" },
-  { href: "/contact", label: "Contact" },
+  { href: "#challenge", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -71,6 +71,13 @@ export function Navbar() {
                     "text-sm font-medium text-white",
                     pathname === href ? " underline" : " hover:underline"
                   )}
+                  onClick={(e) => {
+                    if (href.startsWith("#")) {
+                      e.preventDefault();
+                      const el = document.querySelector(href);
+                      if (el) el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
                 >
                   {label}
                 </Link>
@@ -93,7 +100,16 @@ export function Navbar() {
                         ? "text-[#0E121B] underline"
                         : "text-[#0E121B] hover:underline"
                     )}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={(e) => {
+                      setMenuOpen(false);
+                      if (href.startsWith("#")) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                          target.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }
+                    }}
                   >
                     {label}
                   </Link>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Toaster } from "@/components/ui/sonner";
 import { Inter, Playfair_Display } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           {children}
         </main>
+        <Toaster />
         <Footer />
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronRight } from "lucide-react";
-
+import { toast } from "sonner";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
@@ -31,9 +31,30 @@ function Challenge() {
       onChange: contactSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      try {
+        const res = await fetch("/api/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: value.name,
+            email: value.email,
+            message: value.projectDetails,
+          }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to send email");
+        }
+
+        toast.success("Email sent successfully!");
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        toast.warning("Something went wrong! Try again");
+      }
     },
   });
+
   return (
     <section
       id="challenge"
@@ -44,7 +65,7 @@ function Challenge() {
         <div className=" md:w-4/6 flex flex-col gap-6">
           <p className={`font-semibold  md:text-6xl text-3xl`}>
             We&apos;re l👀king for <br className="md:block hidden" /> new
-            challenge
+            challenges
           </p>
 
           <p
@@ -73,7 +94,7 @@ function Challenge() {
                       <Input
                         id="name"
                         name="name"
-                        type="email"
+                        type="name"
                         placeholder="Name"
                         value={field.state.value}
                         onChange={(e) => field.handleChange(e.target.value)}
@@ -135,7 +156,8 @@ function Challenge() {
                     disabled={!canSubmit || isSubmitting}
                     className="  bg-gradient-to-r py-5  from-[#7A5FFF] to-[#04C9A8] rounded-4xl   hover:cursor-pointer"
                   >
-                    Get in touch
+                    {isSubmitting ? "submitting..." : "Get in touch"}
+
                     <ChevronRight />
                   </Button>
                 </div>

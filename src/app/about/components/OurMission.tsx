@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function OurMission() {
@@ -20,10 +21,13 @@ function OurMission() {
             <br className="md:block hidden" /> solutions that put users first
             and inspire excellence.
           </p>
-          <Button className=" w-40 bg-gradient-to-r py-5 mt-4 font-inter from-[#7A5FFF] to-[#04C9A8] rounded-4xl   hover:cursor-pointer">
+          <Link
+            href="#challenge"
+            className="text-white justify-center flex w-40 bg-gradient-to-r py-3 mt-4 font-inter from-[#7A5FFF] to-[#04C9A8] rounded-4xl   hover:cursor-pointer"
+          >
             Get in touch
             <ChevronRight />
-          </Button>
+          </Link>
         </div>
       </div>
       <div className="md:bg-[linear-gradient(to_bottom,#121212_50%,white_50%)]  ">

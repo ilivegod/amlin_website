@@ -23,7 +23,10 @@ export function Navbar() {
       <nav className="bg-[#121212] md:flex font-inter md:justify-center py-5 px-3  w-full ">
         <div className="flex items-center justify-between md:max-w-6xl w-full ">
           {/* Logo */}
-          <div className=" items-center hidden md:flex gap-2">
+          <Link
+            href="/"
+            className=" items-center hidden md:flex gap-2 hover:cursor-pointer"
+          >
             <Image
               className="dark:invert"
               src="/svg/logo.svg"
@@ -31,7 +34,7 @@ export function Navbar() {
               width={180}
               height={180}
             />
-          </div>
+          </Link>
           <div className="flex items-center md:hidden gap-2">
             <Image
               className="dark:invert h-9 w-auto"
@@ -69,7 +72,7 @@ export function Navbar() {
                   href={href}
                   className={clsx(
                     "text-sm font-medium text-white",
-                    pathname === href ? " underline" : " hover:underline"
+                    pathname === href ? " underline" : "hover:underline"
                   )}
                   onClick={(e) => {
                     if (href.startsWith("#")) {

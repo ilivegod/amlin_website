@@ -14,9 +14,9 @@ function OurMission() {
           <p className="text-white font-inter font-medium text-lg md:text-xl md:pt-5 pt-14  flex">
             We are driven to build smart, seamless digital ecosystems that
             simplify <br className="md:block hidden" /> operations, fuel
-            innovation, and empower lasting change. Our vision is to set{" "}
+            innovation, and empower lasting change. Our vision is to set
             <br className="md:block hidden" /> the global standard for digital
-            transformation through intuitive, scalable{" "}
+            transformation through intuitive, scalable
             <br className="md:block hidden" /> solutions that put users first
             and inspire excellence.
           </p>

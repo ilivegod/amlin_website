@@ -3,14 +3,12 @@
 import { MoveDown } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
-import { Resend } from "resend";
 
 import Challenge from "./components/Challenge";
 
 export default function Home() {
   const solutionsref = useRef<HTMLDivElement | null>(null);
-  const resend = process.env.NEXT_PUBLIC_RESEND_API_KEY;
-  console.log("api:", resend);
+
   return (
     <div className="flex  flex-col min-h-screen overflow-x-hidden ">
       {/* hero section */}

@@ -4,7 +4,7 @@ import { Resend } from "resend";
 
 // export const runtime = "nodejs";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 console.log("api:", resend);
 
 export async function POST(req: Request) {

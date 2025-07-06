@@ -18,7 +18,6 @@ export async function POST(req: Request) {
 
       react: EmailTemplate({ name: name, email: email, message: message }),
     });
-    // console.log("Resend API Key1:", process.env.RESEND_API_KEY);
 
     return Response.json({ success: true, data });
   } catch (error) {

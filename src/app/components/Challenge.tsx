@@ -43,10 +43,12 @@ function Challenge() {
         });
 
         if (!res.ok) {
-          throw new Error("Failed to send email");
+          throw new Error("Something went wrong! Try again ");
         }
 
-        toast.success("Email sent successfully!");
+        toast.success(
+          "Thanks for contacting us! A member of our team will be in touch shortly."
+        );
         form.reset();
       } catch (error) {
         console.error(error);

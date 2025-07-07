@@ -14,7 +14,8 @@ export async function POST(req: Request) {
     const data = await resend.emails.send({
       from: "Amlin Tech <onboarding@resend.dev>", // or a verified domain email
       // to: ["godwinampaw@amlintechco.com"],
-      to: ["sekajunior2014@gmail.com"],
+      to: ["deboline2017@gmail.com"],
+
       subject: "New Form Submission",
 
       react: EmailTemplate({ name: name, email: email, message: message }),

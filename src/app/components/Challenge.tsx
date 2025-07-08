@@ -70,8 +70,17 @@ function Challenge() {
             We&apos;re l
             <motion.button
               initial={{ scale: 0 }}
-              animate={{ scale: 1, rotate: 360 }}
-              transition={{ duration: 0.3 }}
+              animate={{
+                scale: 1,
+                rotate: 360,
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 1,
+                repeatDelay: 1.5,
+                type: "spring",
+                bounce: 0.5,
+              }}
             >
               👀
             </motion.button>

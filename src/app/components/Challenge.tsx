@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
+import { motion } from "motion/react";
 
 function Challenge() {
   const challengeRef = useRef<HTMLDivElement | null>(null);
@@ -66,8 +67,15 @@ function Challenge() {
       <div className="md:flex block md:w-2/3">
         <div className=" md:w-4/6 flex flex-col gap-6">
           <p className={`font-semibold  md:text-6xl text-3xl`}>
-            We&apos;re l👀king for <br className="md:block hidden" /> new
-            challenges
+            We&apos;re l
+            <motion.button
+              initial={{ scale: 0 }}
+              animate={{ scale: 1, rotate: 360 }}
+              transition={{ duration: 0.3 }}
+            >
+              👀
+            </motion.button>
+            king for <br className="md:block hidden" /> new challenges
           </p>
 
           <p
@@ -80,6 +88,7 @@ function Challenge() {
             make it happen.
           </p>
         </div>
+
         <div className=" md:w-2/6 md:pt-0 pt-28 flex flex-col ">
           <form
             onSubmit={(e) => {

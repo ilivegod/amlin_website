@@ -121,7 +121,7 @@ export function Footer() {
                   Solutions
                 </Link>
                 <Link
-                  href="/contact"
+                  href="#challenge"
                   className="text-white/80 hover:text-white text-sm  transition-colors"
                 >
                   Contact

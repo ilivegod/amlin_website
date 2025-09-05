@@ -4,19 +4,28 @@ import Link from "next/link";
 import Image from "next/image";
 import { Copy } from "lucide-react";
 
+import { toast } from "sonner";
+import { z } from "zod";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
+import { useForm } from "@tanstack/react-form";
+
+const contactSchema = z.object({
+  name: z.string().min(3, { message: "Please enter a valid name" }),
+  email: z.string().email().min(3, { message: "Please enter a valid email" }),
+  projectDetails: z.string().min(3, { message: "Please enter a valid name" }),
+});
+
+type FormValues = z.infer<typeof contactSchema>;
 
 export function Footer() {
-  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("");
+  console.log(status);
+
   const [copied, setCopied] = useState(false);
   const footerEmail = "info@amlintechnco.com";
-
-  const handleSubmit = () => {
-    console.log("email:", email);
-  };
 
   const handleCopy = async () => {
     try {
@@ -27,6 +36,43 @@ export function Footer() {
       console.error("Failed to copy!", err);
     }
   };
+
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      projectDetails: "",
+    } as FormValues,
+    validators: {
+      onSubmit: contactSchema,
+      onChange: contactSchema,
+    },
+
+    onSubmit: async ({ value }) => {
+      setStatus("Sending...");
+      try {
+        const res = await fetch("/api/send-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(value),
+        });
+
+        const result = await res.json();
+        if (result.success) {
+          setStatus("✅ Message sent!");
+          form.reset();
+        } else {
+          setStatus("❌ Failed to send. Check server logs.");
+        }
+
+        toast.success("Email sent successfully!");
+        form.reset();
+      } catch (error) {
+        console.error(error);
+        toast.warning("Something went wrong! Try again");
+      }
+    },
+  });
   return (
     <div className="min-h-screen relative mx-auto bg-[#1D1D1D] text-white md:items-center md:px-0 px-4 md:pt-28 pt-14  flex flex-col">
       <div className="grid md:grid-cols-3 grid-cols-1  md:w-3/4">
@@ -66,7 +112,57 @@ export function Footer() {
               in digital design
             </p>
           </div>
-          <form onSubmit={handleSubmit} className="relative w-full mx-auto">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              form.handleSubmit();
+            }}
+            className="relative w-full mx-auto"
+          >
+            <div className="relative">
+              <form.Field name="email">
+                {(field) => (
+                  <div className="relative">
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="E-mail"
+                      value={field.state.value}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      className="bg-transparent border-0 border-b-2 border-white rounded-none px-0 py-4 text-white placeholder:text-gray-400 text-lg focus-visible:ring-0 focus-visible:border-white"
+                      required
+                    />
+
+                    <form.Subscribe
+                      selector={(state) => [
+                        state.canSubmit,
+                        state.isSubmitting,
+                      ]}
+                    >
+                      {([canSubmit, isSubmitting]) => (
+                        <Button
+                          type="submit"
+                          size="icon"
+                          disabled={!canSubmit || isSubmitting}
+                          className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#7563FC] hover:bg-purple-700 hover:cursor-pointer rounded-full w-5 h-5 flex items-center justify-center"
+                        >
+                          {isSubmitting ? (
+                            <span className="text-sm text-black">...</span>
+                          ) : (
+                            <ArrowRight className="w-5 h-5 text-black" />
+                          )}
+                          <span className="sr-only">Subscribe</span>
+                        </Button>
+                      )}
+                    </form.Subscribe>
+                  </div>
+                )}
+              </form.Field>
+            </div>
+          </form>
+          {/* <form onSubmit={handleSubmit} className="relative w-full mx-auto">
             <div className="relative">
               <Input
                 type="email"
@@ -85,7 +181,7 @@ export function Footer() {
                 <span className="sr-only">Subscribe</span>
               </Button>
             </div>
-          </form>
+          </form> */}
         </div>
         {/* right */}
         <div className="flex flex-col  md:items-center md:pt-0 pt-16">

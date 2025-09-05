@@ -1,29 +1,61 @@
-// app/api/send-email/route.ts
-import { EmailTemplate } from "@/components/EmailTemplate";
-import { Resend } from "resend";
-
-// export const runtime = "nodejs";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 export async function POST(req: Request) {
-  const body = await req.json();
-  const { name, email, message } = body;
-
   try {
-    const data = await resend.emails.send({
-      from: "Amlin Tech <godwinampaw@amlintechco.com>", // or a verified domain email
-      to: ["godwinampaw@amlintechco.com"],
-      subject: "New Form Submission",
+    const { name, email, projectDetails } = await req.json();
 
-      react: EmailTemplate({ name: name, email: email, message: message }),
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT),
+      secure: true, // true for 465, false for 587
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     });
 
-    return Response.json({ success: true, data });
-  } catch (error) {
-    // console.log("Resend API Key2:", process.env.RESEND_API_KEY);
+    await transporter.sendMail({
+      // to: "amlintechnologies@gmail.com", // replace with your receiving email
+      to: "sekajunior2014@gmail.com", // replace with your receiving email
+      subject: `New Form Submission from ${name}`,
+      text: `
+📩 New amlin tech Form Submission:
 
-    console.error(error);
-    return Response.json({ error: "Failed to send email" }, { status: 500 });
+- Name: ${name}
+- Email: ${email}
+- Project Details: ${projectDetails}
+
+      `,
+      html: `
+  <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+    <h2 style="color: #00A991;">📩 New Amlin Tech Form Submission</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+      <tr>
+        <td style="padding: 8px; font-weight: bold; background: #f9f9f9;">Name</td>
+        <td style="padding: 8px; background: #f9f9f9;">${name}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; font-weight: bold; background: #f1f1f1;">Email</td>
+        <td style="padding: 8px; background: #f1f1f1;">${email}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px; font-weight: bold; background: #f1f1f1;">Project details</td>
+        <td style="padding: 8px; background: #f1f1f1;">${projectDetails}</td>
+      </tr>
+      
+      
+    </table>
+    <p style="margin-top: 20px; font-size: 13px; color: #666;">
+      This message was automatically sent from your CrossMed EHR website form.
+    </p>
+  </div>
+  `,
+    });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Email sending error:", error);
+    return NextResponse.json({ success: false, error });
   }
 }

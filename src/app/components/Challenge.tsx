@@ -8,8 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { motion } from "motion/react";
+import { useState } from "react";
 
 function Challenge() {
+  const [status, setStatus] = useState("");
   const challengeRef = useRef<HTMLDivElement | null>(null);
   const contactSchema = z.object({
     name: z.string().min(3, { message: "Please enter a valid name" }),
@@ -36,21 +38,34 @@ function Challenge() {
         const res = await fetch("/api/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: value.name,
-            email: value.email,
-            message: value.projectDetails,
-          }),
+          // body: JSON.stringify({
+          //   name: value.name,
+          //   email: value.email,
+          //   message: value.projectDetails,
+          // }),
+          body: JSON.stringify(value),
         });
 
-        if (!res.ok) {
-          throw new Error("Something went wrong! Try again ");
+        const result = await res.json();
+        // if (!res.ok) {
+        //   throw new Error("Something went wrong! Try again ");
+        // }
+        if (result.success) {
+          setStatus("✅ Message sent!");
+          form.reset();
+        } else {
+          setStatus("❌ Failed to send. Check server logs.");
         }
 
         toast.success(
           "Thanks for contacting us! A member of our team will be in touch shortly."
         );
         form.reset();
+
+        // toast.success(
+        //   "Thanks for contacting us! A member of our team will be in touch shortly."
+        // );
+        // form.reset();
       } catch (error) {
         console.error(error);
         toast.warning("Something went wrong! Try again");

@@ -15,7 +15,9 @@ import { useForm } from "@tanstack/react-form";
 const contactSchema = z.object({
   name: z.string().min(3, { message: "Please enter a valid name" }),
   email: z.string().email().min(3, { message: "Please enter a valid email" }),
-  projectDetails: z.string().min(3, { message: "Please enter a valid name" }),
+  projectDetails: z
+    .string()
+    .min(3, { message: "Please enter your project details" }),
 });
 
 type FormValues = z.infer<typeof contactSchema>;

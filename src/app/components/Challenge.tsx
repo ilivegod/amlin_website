@@ -11,7 +11,8 @@ import { motion } from "motion/react";
 import { useState } from "react";
 
 function Challenge() {
-  const [status, setStatus] = useState("");
+  const [, setStatus] = useState("");
+
   const challengeRef = useRef<HTMLDivElement | null>(null);
   const contactSchema = z.object({
     name: z.string().min(3, { message: "Please enter a valid name" }),

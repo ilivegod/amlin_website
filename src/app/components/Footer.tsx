@@ -23,8 +23,7 @@ const contactSchema = z.object({
 type FormValues = z.infer<typeof contactSchema>;
 
 export function Footer() {
-  const [status, setStatus] = useState("");
-  console.log(status);
+  const [, setStatus] = useState("");
 
   const [copied, setCopied] = useState(false);
   const footerEmail = "info@amlintechnco.com";

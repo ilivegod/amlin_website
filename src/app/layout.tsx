@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { SmoothScroll } from "./components/SmoothScroll";
 import localFont from "next/font/local";
 
 const inter = Inter({
@@ -36,15 +37,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
+        <SmoothScroll>
+          <Navbar />
 
-        <main
-          className={`${inter.variable} ${playfair.variable} ${polysans.variable}`}
-        >
-          {children}
-        </main>
+          <main
+            className={`${inter.variable} ${playfair.variable} ${polysans.variable}`}
+          >
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
         <Toaster />
-        <Footer />
       </body>
     </html>
   );

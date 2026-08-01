@@ -63,7 +63,7 @@ export function CapabilitiesSection() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#050505] px-[var(--hero-gutter)] py-24">
+    <section className="relative flex min-h-dvh w-full flex-1 flex-col items-center justify-center overflow-hidden bg-[#050505] px-[var(--hero-gutter)] py-24">
       <div
         className="relative flex w-full max-w-5xl flex-col items-center gap-1 md:gap-0"
         onMouseLeave={() => setHoveredIndex(null)}

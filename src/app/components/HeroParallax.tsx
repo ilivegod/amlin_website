@@ -18,38 +18,38 @@ export function HeroParallax({ background, scrim, children }: HeroParallaxProps)
     offset: ["start start", "end start"],
   });
 
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "38%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.45, 1], [1, 0.65, 0.1]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.22]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
-
-  if (reduceMotion) {
-    return (
-      <section className="hero relative min-h-screen overflow-hidden">
-        {background}
-        {scrim}
-        <div className="relative z-10">{children}</div>
-      </section>
-    );
-  }
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65, 1], [1, 0.85, 0.55]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
   return (
-    <section ref={ref} className="hero relative min-h-screen overflow-hidden">
-      <motion.div
-        className="absolute inset-0 will-change-transform"
-        style={{ scale: bgScale, y: bgY }}
-      >
-        {background}
-      </motion.div>
+    <section ref={ref} className="hero relative h-dvh overflow-hidden">
+      {reduceMotion ? (
+        <>
+          <div className="absolute inset-0">{background}</div>
+          {scrim}
+          <div className="relative z-10 h-full">{children}</div>
+        </>
+      ) : (
+        <>
+          <motion.div
+            className="absolute inset-0 will-change-transform"
+            style={{ scale: bgScale, y: bgY }}
+          >
+            {background}
+          </motion.div>
 
-      {scrim}
+          {scrim}
 
-      <motion.div
-        className="relative z-10 will-change-transform"
-        style={{ y: contentY, opacity: contentOpacity }}
-      >
-        {children}
-      </motion.div>
+          <motion.div
+            className="relative z-10 h-full will-change-transform"
+            style={{ y: contentY, opacity: contentOpacity }}
+          >
+            {children}
+          </motion.div>
+        </>
+      )}
     </section>
   );
 }

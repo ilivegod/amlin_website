@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -42,7 +43,11 @@ const testimonials = [
   },
 ] as const;
 
-export function TestimonialsSection() {
+type TestimonialsSectionProps = {
+  className?: string;
+};
+
+export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const [activeIndex, setActiveIndex] = useState(0);
@@ -161,7 +166,12 @@ export function TestimonialsSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#050505] py-20 md:py-28">
+    <section
+      className={clsx(
+        "relative overflow-hidden bg-[#050505] py-20 md:py-28",
+        className
+      )}
+    >
       <div className="mx-auto max-w-6xl px-[var(--hero-gutter)] text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
           <Users className="size-3.5 text-white/55" strokeWidth={1.75} />

@@ -19,7 +19,7 @@ const links = [
 const SCROLL_RANGE = 160;
 
 const NAV_HEIGHT_IDLE = 68;
-const NAV_HEIGHT_COMPACT = 56;
+const NAV_HEIGHT_COMPACT = 64;
 
 function clamp01(value: number) {
   return Math.min(1, Math.max(0, value));

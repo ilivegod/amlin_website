@@ -67,7 +67,7 @@ export function CapabilitiesSection() {
       <div
         className="relative flex w-full max-w-5xl flex-col items-center gap-1 md:gap-0"
         onMouseLeave={() => setHoveredIndex(null)}
-        onFocusOut={(event) => {
+        onBlur={(event) => {
           if (!event.currentTarget.contains(event.relatedTarget as Node)) {
             setHoveredIndex(null);
           }
@@ -95,7 +95,7 @@ export function CapabilitiesSection() {
               ].join(" ")}
               style={{ zIndex: isActive ? 10 : 1 }}
             >
-              {item.multiline ? (
+              {"multiline" in item && item.multiline ? (
                 <>
                   Systems Integration & Cloud
                   <br />

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import {
   motion,
+  useMotionTemplate,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -53,7 +54,7 @@ const industries: {
 ];
 
 const GREY_BORDER = "#eaeaea";
-const DARK_BORDER = "#050505";
+const FILL_BORDER = "#9e9e9e";
 
 const PIN_SCROLL_VH = 280;
 const BORDER_FILL_START = 0.34;
@@ -104,14 +105,22 @@ type GridBordersProps = {
 function GridBorders({ metrics, fillProgress }: GridBordersProps) {
   const { width, height, dividers } = metrics;
 
-  const fillX = useTransform(fillProgress, (p) => p * width);
-  const fillY = useTransform(fillProgress, (p) => p * height);
+  const horizontalClipRight = useTransform(
+    fillProgress,
+    (p) => `${(1 - p) * 100}%`
+  );
+  const horizontalClip = useMotionTemplate`inset(0 ${horizontalClipRight} 0 0)`;
+
+  const verticalClipBottom = useTransform(
+    fillProgress,
+    (p) => `${(1 - p) * 100}%`
+  );
+  const verticalClip = useMotionTemplate`inset(0 0 ${verticalClipBottom} 0)`;
 
   const lineProps = {
     strokeWidth: 1,
     strokeLinecap: "butt" as const,
     vectorEffect: "nonScalingStroke" as const,
-    shapeRendering: "crispEdges" as const,
   };
 
   if (width <= 0 || height <= 0) return null;
@@ -123,44 +132,32 @@ function GridBorders({ metrics, fillProgress }: GridBordersProps) {
       height={height}
       aria-hidden="true"
     >
-      {/* Horizontal: grey unfilled (right), black filled (left) */}
-      <motion.line
-        x1={fillX}
-        y1={0.5}
-        x2={width}
-        y2={0.5}
-        stroke={GREY_BORDER}
+      <g stroke={GREY_BORDER} fill="none" {...lineProps}>
+        <path d={`M 0.5 0.5 H ${width - 0.5}`} />
+        {dividers.map((x) => (
+          <path key={`grey-${x}`} d={`M ${x} 0.5 V ${height - 0.5}`} />
+        ))}
+      </g>
+
+      <motion.g
+        stroke={FILL_BORDER}
+        fill="none"
         {...lineProps}
-      />
-      <motion.line
-        x1={0}
-        y1={0.5}
-        x2={fillX}
-        y2={0.5}
-        stroke={DARK_BORDER}
-        {...lineProps}
-      />
+        style={{ clipPath: horizontalClip }}
+      >
+        <path d={`M 0.5 0.5 H ${width - 0.5}`} />
+      </motion.g>
 
       {dividers.map((x) => (
-        <g key={x}>
-          {/* Vertical: grey unfilled (bottom), black filled (top) */}
-          <motion.line
-            x1={x}
-            y1={fillY}
-            x2={x}
-            y2={height - 0.5}
-            stroke={GREY_BORDER}
-            {...lineProps}
-          />
-          <motion.line
-            x1={x}
-            y1={0.5}
-            x2={x}
-            y2={fillY}
-            stroke={DARK_BORDER}
-            {...lineProps}
-          />
-        </g>
+        <motion.g
+          key={`fill-${x}`}
+          stroke={FILL_BORDER}
+          fill="none"
+          {...lineProps}
+          style={{ clipPath: verticalClip }}
+        >
+          <path d={`M ${x} 0.5 V ${height - 0.5}`} />
+        </motion.g>
       ))}
     </svg>
   );
@@ -191,8 +188,13 @@ function useGridMetrics(gridRef: React.RefObject<HTMLDivElement | null>) {
 
       const dividers: number[] = [];
       for (let i = 0; i < rowCells.length - 1; i++) {
+        const current = rowCells[i].getBoundingClientRect();
         const next = rowCells[i + 1].getBoundingClientRect();
-        dividers.push(Math.round(next.left - rect.left) + 0.5);
+        const x = (current.right + next.left) / 2 - rect.left;
+
+        if (x > 8 && x < rect.width - 8) {
+          dividers.push(Math.round(x) + 0.5);
+        }
       }
 
       setMetrics({
@@ -253,7 +255,7 @@ export function IndustrySolutionsSection() {
               head-on. From streamlining operations to unlocking new revenue streams,
               we help industry leaders innovate, adapt, and thrive.
             </p>
-            <div className="industry-grid mt-12 grid grid-cols-1 border-t border-[#050505] sm:grid-cols-2 lg:grid-cols-4 md:mt-14">
+            <div className="industry-grid mt-12 grid grid-cols-1 border-t border-[#eaeaea] sm:grid-cols-2 lg:grid-cols-4 md:mt-14">
               <IndustryGridContent />
             </div>
           </div>

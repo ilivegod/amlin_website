@@ -75,7 +75,7 @@ export function Footer() {
     },
   });
   return (
-    <div className="min-h-screen relative mx-auto bg-[#1D1D1D] text-white md:items-center md:px-0 px-4 md:pt-28 pt-14  flex flex-col">
+    <div className="min-h-screen relative mx-auto bg-[#050505] text-white md:items-center md:px-0 px-4 md:pt-28 pt-14  flex flex-col">
       <div className="grid md:grid-cols-3 grid-cols-1  md:w-3/4">
         {/* left side */}
         <div className="flex flex-col gap-6  items-left ">

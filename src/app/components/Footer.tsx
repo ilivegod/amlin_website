@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ContactLink } from "@/components/ContactLink";
 import Image from "next/image";
 import { Copy } from "lucide-react";
 
@@ -217,12 +218,11 @@ export function Footer() {
                 >
                   Work
                 </Link>
-                <Link
-                  href="#challenge"
+                <ContactLink
                   className="text-white/80 hover:text-white text-sm  transition-colors"
                 >
                   Contact
-                </Link>
+                </ContactLink>
               </nav>
             </div>
           </div>

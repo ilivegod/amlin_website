@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { ContactLink } from "@/components/ContactLink";
 import { HeroBackground } from "@/components/hero/HeroBackground";
 import { RevealTitle } from "@/components/RevealTitle";
 import { CapabilitiesSection } from "./components/CapabilitiesSection";
@@ -18,12 +19,6 @@ const headlineLines = [
   "that works",
   "from day one.",
 ];
-
-function scrollToMeetTheTeam(e: React.MouseEvent<HTMLAnchorElement>) {
-  if (window.location.pathname !== "/") return;
-  e.preventDefault();
-  document.getElementById("meet-the-team")?.scrollIntoView({ behavior: "smooth" });
-}
 
 export default function Home() {
   return (
@@ -85,13 +80,11 @@ export default function Home() {
               </span>
             </Link>
 
-            <Link
-              href="/#meet-the-team"
-              onClick={scrollToMeetTheTeam}
+            <ContactLink
               className="relative pb-[3px] font-inter text-sm font-medium text-white/[0.72] transition-colors duration-300 after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-[var(--amlin-accent)] after:opacity-70 hover:text-white hover:after:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] rounded-sm"
             >
               Talk to our team
-            </Link>
+            </ContactLink>
           </div>
           </div>
 

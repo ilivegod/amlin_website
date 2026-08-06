@@ -9,6 +9,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type CSSProperties, type MouseEvent } from "react";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ContactLink } from "@/components/ContactLink";
+import { smoothScrollToId } from "@/lib/smooth-scroll";
+import { useLenis } from "lenis/react";
+import type Lenis from "lenis";
 
 const links = [
   { href: "/work", label: "Work" },
@@ -34,17 +38,21 @@ function lerp(start: number, end: number, progress: number) {
 function handleAnchorClick(
   e: MouseEvent<HTMLAnchorElement>,
   href: string,
+  lenis: Lenis | null | undefined,
   onNavigate?: () => void
 ) {
   if (!href.includes("#")) return;
 
-  const hash = href.split("#")[1];
+  const hashIndex = href.indexOf("#");
+  const linkPath = href.slice(0, hashIndex);
+  const hash = href.slice(hashIndex + 1);
   if (!hash) return;
-  if (window.location.pathname !== "/") return;
+
+  if (linkPath && linkPath !== window.location.pathname) return;
 
   e.preventDefault();
   onNavigate?.();
-  document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+  smoothScrollToId(hash, lenis);
 }
 
 function isNavLinkActive(href: string, pathname: string) {
@@ -154,12 +162,14 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const isMobile = useIsMobile();
+  const lenis = useLenis();
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isOverlayPage =
     pathname === "/work" ||
     pathname === "/services" ||
-    pathname === "/solutions";
+    pathname === "/solutions" ||
+    pathname === "/about";
   const isScrollNav = (isHome || isOverlayPage) && !isMobile;
   const progress = isScrollNav ? scrollProgress : isMobile ? 0 : 1;
   const isOnHero = isHome && progress < 0.55;
@@ -249,7 +259,7 @@ export function Navbar() {
                     navLinkClass(useHeroChrome, isActive),
                     "col-start-1 row-start-1"
                   )}
-                  onClick={(e) => handleAnchorClick(e, href)}
+                  onClick={(e) => handleAnchorClick(e, href, lenis)}
                   aria-current={isActive ? "page" : undefined}
                 >
                   {label}
@@ -260,13 +270,12 @@ export function Navbar() {
           </ul>
 
           <div className="flex shrink-0 items-center justify-end">
-            <Link
-              href="/#meet-the-team"
+            <ContactLink
               className={clsx(ctaClass(useHeroChrome), "hidden md:inline-flex")}
-              onClick={(e) => handleAnchorClick(e, "/#meet-the-team")}
+              onNavigate={closeMenu}
             >
               Talk to our team
-            </Link>
+            </ContactLink>
 
             <button
               type="button"
@@ -346,7 +355,7 @@ export function Navbar() {
                     href={link.href}
                     className={mobileNavLinkClass(isActive)}
                     onClick={(e) => {
-                      handleAnchorClick(e, link.href, closeMenu);
+                      handleAnchorClick(e, link.href, lenis, closeMenu);
                       if (!link.href.includes("#")) closeMenu();
                     }}
                     aria-current={isActive ? "page" : undefined}
@@ -368,15 +377,12 @@ export function Navbar() {
                 }}
                 className="pt-4"
               >
-                <Link
-                  href="/#meet-the-team"
+                <ContactLink
                   className={clsx(ctaClass(false), "inline-flex")}
-                  onClick={(e) =>
-                    handleAnchorClick(e, "/#meet-the-team", closeMenu)
-                  }
+                  onNavigate={closeMenu}
                 >
                   Talk to our team
-                </Link>
+                </ContactLink>
               </motion.div>
             </nav>
           </motion.div>

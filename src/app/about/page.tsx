@@ -1,19 +1,16 @@
-"use client";
-
-import React from "react";
 import Challenge from "../components/Challenge";
 
-import OurMission from "./components/OurMission";
-import OurValues from "./components/OurValues";
+import { AboutHashScroll } from "./components/AboutHashScroll";
+import { AboutIntro } from "./components/AboutIntro";
+import { OurValuesSection } from "./components/OurValuesSection";
 
-function About() {
+export default function AboutPage() {
   return (
-    <div className="flex  flex-col min-h-screen overflow-x-hidden ">
-      <OurMission />
-      <OurValues />
+    <div className="flex min-h-screen w-full flex-col bg-[#050505]">
+      <AboutHashScroll />
+      <AboutIntro />
+      <OurValuesSection />
       <Challenge />
     </div>
   );
 }
-
-export default About;

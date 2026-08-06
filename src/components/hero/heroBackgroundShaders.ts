@@ -2,7 +2,7 @@ export const HERO_BG_CONFIG = {
   density: 2.4,
   aperture: 0.62,
   tilt: 0.42,
-  exposure: 1.35,
+  exposure: 1.2,
   grain: 0.03,
   parallax: 0.55,
   maxPixelRatio: 1.75,
@@ -139,14 +139,14 @@ void main() {
   col = max(col - 0.008, 0.0);
 
   float vig = smoothstep(1.55, 0.30, length(uv * vec2(1.0, 1.22)));
-  col *= mix(0.58, 1.0, vig);
+  col *= mix(0.5, 1.0, vig);
 
   float g = hash21(gl_FragCoord.xy * 1.7 + fract(T) * vec2(97.1, 61.7));
   col += (g - 0.5) * uGrain;
 
   float luma = dot(col, vec3(0.299, 0.587, 0.114));
-  vec3 blueLo = vec3(0.012, 0.04, 0.11);
-  vec3 blueHi = vec3(0.24, 0.56, 0.82);
+  vec3 blueLo = vec3(0.008, 0.025, 0.075);
+  vec3 blueHi = vec3(0.16, 0.42, 0.68);
   col = mix(blueLo, blueHi, clamp(luma * 1.18, 0.0, 1.0));
 
   gl_FragColor = vec4(col, 1.0);

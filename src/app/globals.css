@@ -315,7 +315,7 @@
 
 .hero-bg--fallback {
   background:
-    radial-gradient(120% 90% at 82% 42%, #1a4d78 0%, #0b2850 55%, #041525 100%);
+    radial-gradient(120% 90% at 82% 42%, #143d60 0%, #081f3d 55%, #030f1a 100%);
 }
 
 @media (max-width: 860px) {

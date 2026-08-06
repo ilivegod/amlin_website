@@ -5,7 +5,7 @@ import { ProjectRow } from "./ProjectRow";
 
 export function FeaturedProjectsSection() {
   return (
-    <section className="relative w-full bg-[#050505] px-[var(--hero-gutter)] pb-24">
+    <section className="relative w-full bg-[#050505] px-[var(--hero-gutter)] pb-24 font-inter">
       <div className="border-b work-grid-line pb-10 pt-24 md:pb-12 md:pt-28">
         <FeaturedProjectsTitle />
       </div>

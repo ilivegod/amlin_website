@@ -13,7 +13,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 const links = [
   { href: "/work", label: "Work" },
   { href: "/services", label: "Services" },
-  { href: "/#industry-solutions", label: "Industries" },
+  { href: "/solutions", label: "Industries" },
   { href: "/about", label: "About" },
 ];
 
@@ -47,20 +47,37 @@ function handleAnchorClick(
   document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
 }
 
-const navLinkClass = (onHero: boolean) =>
+function isNavLinkActive(href: string, pathname: string) {
+  if (href.includes("#")) {
+    return false;
+  }
+
+  return pathname === href;
+}
+
+const navLinkClass = (onHero: boolean, isActive: boolean) =>
   clsx(
-    "rounded-sm font-inter text-sm font-medium transition-all duration-300 ease-out hover:font-semibold",
+    "rounded-sm font-inter text-sm transition-all duration-300 ease-out",
     "focus-visible:outline-none focus-visible:ring-2",
-    onHero
-      ? "text-white/72 hover:text-white focus-visible:ring-[var(--amlin-accent)]"
-      : "text-white/[0.66] hover:text-white focus-visible:ring-white/60"
+    isActive
+      ? "font-semibold text-white underline decoration-white/80 underline-offset-[6px]"
+      : "font-medium hover:font-semibold",
+    !isActive &&
+      (onHero
+        ? "text-white/72 hover:text-white focus-visible:ring-[var(--amlin-accent)]"
+        : "text-white/[0.66] hover:text-white focus-visible:ring-white/60"),
+    isActive && onHero && "focus-visible:ring-[var(--amlin-accent)]",
+    isActive && !onHero && "focus-visible:ring-white/60"
   );
 
-const mobileNavLinkClass = clsx(
-  "font-polysans text-[clamp(2.25rem,9vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white",
-  "transition-opacity duration-300 hover:opacity-70",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-sm"
-);
+const mobileNavLinkClass = (isActive: boolean) =>
+  clsx(
+    "font-polysans text-[clamp(2.25rem,9vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white",
+    "transition-opacity duration-300 hover:opacity-70",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-sm",
+    isActive &&
+      "font-extrabold underline decoration-white/85 underline-offset-[0.14em] decoration-2"
+  );
 
 const ctaClass = (onHero: boolean) =>
   clsx(
@@ -93,7 +110,11 @@ function getMobileNavStyles(): { header: CSSProperties; nav: CSSProperties } {
   };
 }
 
-function getNavStyles(progress: number, onHero: boolean, isWork = false): {
+function getNavStyles(
+  progress: number,
+  onHero: boolean,
+  useDarkPill = false
+): {
   header: CSSProperties;
   nav: CSSProperties;
 } {
@@ -114,7 +135,7 @@ function getNavStyles(progress: number, onHero: boolean, isWork = false): {
       height: lerp(NAV_HEIGHT_IDLE, NAV_HEIGHT_COMPACT, p),
       maxWidth: p <= 0 ? "100%" : `min(100%, ${lerp(100, 72, p)}rem)`,
       borderRadius: radius,
-      border: isWork ? compactBorder : undefined,
+      border: useDarkPill ? compactBorder : undefined,
       backgroundColor: onHero
         ? `rgba(8, 32, 68, ${lerp(0, 0.55, p)})`
         : `rgba(0, 0, 0, ${lerp(0, 0.52, p)})`,
@@ -135,14 +156,17 @@ export function Navbar() {
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const isWork = pathname === "/work";
-  const isScrollNav = (isHome || isWork) && !isMobile;
+  const isOverlayPage =
+    pathname === "/work" ||
+    pathname === "/services" ||
+    pathname === "/solutions";
+  const isScrollNav = (isHome || isOverlayPage) && !isMobile;
   const progress = isScrollNav ? scrollProgress : isMobile ? 0 : 1;
   const isOnHero = isHome && progress < 0.55;
-  const useHeroChrome = isOnHero || (isWork && progress < 0.55);
+  const useHeroChrome = isOnHero || (isOverlayPage && progress < 0.55);
   const { header: headerStyle, nav: navStyle } = isMobile
     ? getMobileNavStyles()
-    : getNavStyles(progress, isOnHero, isWork);
+    : getNavStyles(progress, isOnHero, isOverlayPage);
 
   useEffect(() => {
     if (!isScrollNav) {
@@ -205,23 +229,34 @@ export function Navbar() {
           </div>
 
           <ul className="hidden items-center justify-center gap-[clamp(1.25rem,2.6vw,2.5rem)] md:flex">
-            {links.map(({ href, label }) => (
+            {links.map(({ href, label }) => {
+              const isActive = isNavLinkActive(href, pathname);
+
+              return (
               <li key={href} className="grid list-none justify-items-center">
                 <span
                   aria-hidden="true"
-                  className="invisible col-start-1 row-start-1 font-inter text-sm font-semibold"
+                  className={clsx(
+                    "invisible col-start-1 row-start-1 font-inter text-sm",
+                    isActive ? "font-semibold underline" : "font-semibold"
+                  )}
                 >
                   {label}
                 </span>
                 <Link
                   href={href}
-                  className={clsx(navLinkClass(useHeroChrome), "col-start-1 row-start-1")}
+                  className={clsx(
+                    navLinkClass(useHeroChrome, isActive),
+                    "col-start-1 row-start-1"
+                  )}
                   onClick={(e) => handleAnchorClick(e, href)}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {label}
                 </Link>
               </li>
-            ))}
+            );
+            })}
           </ul>
 
           <div className="flex shrink-0 items-center justify-end">
@@ -264,7 +299,7 @@ export function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col bg-black/35 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-black/48 backdrop-blur-md md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"
@@ -292,7 +327,10 @@ export function Navbar() {
             </div>
 
             <nav className="flex flex-1 flex-col justify-center gap-8 px-10 pb-16">
-              {links.map((link, index) => (
+              {links.map((link, index) => {
+                const isActive = isNavLinkActive(link.href, pathname);
+
+                return (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, x: 28 }}
@@ -306,16 +344,18 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={mobileNavLinkClass}
+                    className={mobileNavLinkClass(isActive)}
                     onClick={(e) => {
                       handleAnchorClick(e, link.href, closeMenu);
                       if (!link.href.includes("#")) closeMenu();
                     }}
+                    aria-current={isActive ? "page" : undefined}
                   >
                     {link.label}
                   </Link>
                 </motion.div>
-              ))}
+              );
+              })}
 
               <motion.div
                 initial={{ opacity: 0, x: 28 }}
@@ -343,7 +383,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      {!isHome && !isWork && (
+      {!isHome && !isOverlayPage && (
         <div
           className="pointer-events-none h-[calc(var(--nav-h)+0.75rem)]"
           aria-hidden="true"

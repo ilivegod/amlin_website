@@ -1,86 +1,29 @@
-import Image from "next/image";
-import React from "react";
+import { RevealTitle } from "@/components/RevealTitle";
+import { services } from "@/data/services";
 
-const services = [
-  {
-    number: "01",
-    src: "/svg/digitalTransformation.svg",
-    alt: "Digital Transformation icon ",
-    title: "Digital Transformation",
-    description:
-      "We help businesses rethink and digitize operations with strategy-driven solutions that boost agility, cut costs, and create value in a digital-first world.",
-  },
-  {
-    number: "02",
-    src: "/svg/AI.svg",
-    alt: "Workflow & AI Automation icon ",
-    title: "Workflow & AI Automation",
-    description:
-      "We streamline repetitive processes and unlock efficiency with intelligent automation and AI, freeing teams to focus on high-value, strategic work.",
-  },
-  {
-    number: "03",
-    src: "/svg/design.svg",
-    alt: "UX/UI & Product Design icon ",
-    title: "UX/UI & Product Design",
-    description:
-      "We craft intuitive user experiences and clean, conversion-driven interfaces that make digital products not only usable, but unforgettable.",
-  },
-  {
-    number: "04",
-    src: "/svg/data.svg",
-    alt: "Data Systems & Analytics icon ",
-    title: "Data Systems & Analytics",
-    description:
-      "We design data pipelines, dashboards, and analytics tools that turn raw data into real insights fueling better decisions and smarter strategies.",
-  },
-  {
-    number: "05",
-    src: "/svg/cloud.svg",
-    alt: "Systems Integration & Cloud Engineering icon ",
-    title: "Systems Integration & Cloud Engineering",
-    description:
-      "We help businesses rethink and digitize operations with strategy-driven solutions that boost agility, cut costs, and create value in a digital-first world.",
-  },
-  {
-    number: "06",
-    src: "/svg/cybersecurity.svg",
-    alt: "Cybersecurity & Compliance icon ",
-    title: "Cybersecurity & Compliance",
-    description:
-      "We secure your digital assets with advanced protection and ensure your systems meet compliance standards, reducing risk and boosting resilience.",
-  },
-];
+import { ServiceCard } from "./ServiceCard";
 
-function ServicesSection() {
+export function ServicesSection() {
   return (
-    <section className=" min-h-screen md:max-w-6xl md:mx-auto md:py-28 mb-10 md:-mb-20">
-      <p className="text-black md:pb-10 font-polysans md:pl-10 text-3xl pt-16 px-4 md:px-0 md:text-5xl font-semibold ">
-        Services We Provide
-      </p>
-      <div className="grid md:grid-cols-3 font-inter grid-cols-1 md:space-y-10">
+    <section className="relative w-full bg-[#050505] px-[var(--hero-gutter)] pb-24 font-inter">
+      <div className="border-b work-grid-line pb-10 pt-12 md:pb-12 md:pt-16">
+        <RevealTitle
+          as="h2"
+          text="Services We Provide"
+          className="font-polysans text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 border-t work-grid-line md:grid-cols-2 lg:grid-cols-3">
         {services.map((service) => (
           <div
             key={service.number}
-            className="md:p-10 px-4 py-10 md:py-0  flex flex-col gap-3 "
+            className="border-b border-r-0 work-grid-line md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0"
           >
-            <p className="text-[#5E646F] text-sm">/{service.number}</p>
-            <Image
-              src={service.src}
-              alt={service.alt}
-              height={800}
-              width={800}
-              className="w-5 h-5"
-            />
-            <p className="text-xl font-semibold">{service.title}</p>
-            <p className="text-[#5E646F] text-sm max-w-2xl">
-              {service.description}
-            </p>
+            <ServiceCard service={service} />
           </div>
         ))}
       </div>
     </section>
   );
 }
-
-export default ServicesSection;

@@ -1,16 +1,11 @@
-import React from "react";
-import Challenge from "../components/Challenge";
-import OurVision from "./components/OurVision";
-import ServicesSection from "./components/ServicesSection";
+import { ServicesIntro } from "./components/ServicesIntro";
+import { ServicesSection } from "./components/ServicesSection";
 
-function Services() {
+export default function ServicesPage() {
   return (
-    <div>
-      <OurVision />
+    <div className="flex min-h-screen w-full flex-col bg-[#050505]">
+      <ServicesIntro />
       <ServicesSection />
-      <Challenge />
     </div>
   );
 }
-
-export default Services;

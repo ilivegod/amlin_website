@@ -71,7 +71,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
               <p className="font-inter text-sm leading-relaxed text-white/65 md:text-[0.9375rem]">
                 {project.description}
               </p>
-              <h2 className="font-polysans text-2xl font-semibold text-white md:text-3xl lg:text-right">
+              <h2 className="font-polysans text-2xl font-semibold tracking-[-0.02em] text-[#b0b0b0] md:text-3xl lg:text-right">
                 {project.title}
               </h2>
             </div>
@@ -103,7 +103,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
                 {project.description}
               </motion.p>
               <motion.h2
-                className="font-polysans text-2xl font-semibold text-white md:text-3xl lg:text-right"
+                className="font-polysans text-2xl font-semibold tracking-[-0.02em] text-[#b0b0b0] md:text-3xl lg:text-right"
                 variants={textItemVariants}
               >
                 {project.title}

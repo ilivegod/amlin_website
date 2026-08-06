@@ -8,6 +8,8 @@ import { X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type CSSProperties, type MouseEvent } from "react";
 
+import { useIsMobile } from "@/hooks/useIsMobile";
+
 const links = [
   { href: "/work", label: "Work" },
   { href: "/services", label: "Services" },
@@ -70,13 +72,38 @@ const ctaClass = (onHero: boolean) =>
       : "border-white/16 bg-black/35 text-white/90 hover:border-white/50 hover:text-white focus-visible:ring-white/60"
   );
 
-function getNavStyles(progress: number, onHero: boolean): {
+function getMobileNavStyles(): { header: CSSProperties; nav: CSSProperties } {
+  return {
+    header: {
+      top: 0,
+      paddingTop: 12,
+    },
+    nav: {
+      height: NAV_HEIGHT_COMPACT,
+      maxWidth: "100%",
+      borderRadius: 0,
+      border: "none",
+      backgroundColor: "transparent",
+      backdropFilter: "none",
+      WebkitBackdropFilter: "none",
+      boxShadow: "none",
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+  };
+}
+
+function getNavStyles(progress: number, onHero: boolean, isWork = false): {
   header: CSSProperties;
   nav: CSSProperties;
 } {
   const p = clamp01(progress);
   const blur = lerp(onHero ? 0 : 0, 22, p);
   const radius = lerp(onHero ? 0 : 0, 22, p);
+  const compactBorder =
+    !onHero && p > 0.35
+      ? "1px solid rgba(255, 255, 255, 0.1)"
+      : "1px solid transparent";
 
   return {
     header: {
@@ -87,6 +114,7 @@ function getNavStyles(progress: number, onHero: boolean): {
       height: lerp(NAV_HEIGHT_IDLE, NAV_HEIGHT_COMPACT, p),
       maxWidth: p <= 0 ? "100%" : `min(100%, ${lerp(100, 72, p)}rem)`,
       borderRadius: radius,
+      border: isWork ? compactBorder : undefined,
       backgroundColor: onHero
         ? `rgba(8, 32, 68, ${lerp(0, 0.55, p)})`
         : `rgba(0, 0, 0, ${lerp(0, 0.52, p)})`,
@@ -101,41 +129,23 @@ function getNavStyles(progress: number, onHero: boolean): {
   };
 }
 
-function getWorkNavStyles(): { header: CSSProperties; nav: CSSProperties } {
-  return {
-    header: {
-      top: 24,
-      paddingTop: 0,
-    },
-    nav: {
-      height: NAV_HEIGHT_COMPACT,
-      maxWidth: "min(100%, 72rem)",
-      borderRadius: 22,
-      border: "1px solid rgba(255, 255, 255, 0.1)",
-      backgroundColor: "rgba(0, 0, 0, 0.52)",
-      backdropFilter: "blur(22px)",
-      WebkitBackdropFilter: "blur(22px)",
-      boxShadow: "0 12px 44px rgba(0, 0, 0, 0.38)",
-      paddingLeft: 24,
-      paddingRight: 24,
-    },
-  };
-}
-
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const isMobile = useIsMobile();
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isWork = pathname === "/work";
-  const progress = isHome ? scrollProgress : 1;
-  const isOnHero = (isHome && progress < 0.55) || isWork;
-  const { header: headerStyle, nav: navStyle } = isWork
-    ? getWorkNavStyles()
-    : getNavStyles(progress, isOnHero);
+  const isScrollNav = (isHome || isWork) && !isMobile;
+  const progress = isScrollNav ? scrollProgress : isMobile ? 0 : 1;
+  const isOnHero = isHome && progress < 0.55;
+  const useHeroChrome = isOnHero || (isWork && progress < 0.55);
+  const { header: headerStyle, nav: navStyle } = isMobile
+    ? getMobileNavStyles()
+    : getNavStyles(progress, isOnHero, isWork);
 
   useEffect(() => {
-    if (!isHome) {
+    if (!isScrollNav) {
       setScrollProgress(1);
       return;
     }
@@ -147,7 +157,7 @@ export function Navbar() {
     updateScrollProgress();
     window.addEventListener("scroll", updateScrollProgress, { passive: true });
     return () => window.removeEventListener("scroll", updateScrollProgress);
-  }, [isHome]);
+  }, [isScrollNav]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -169,10 +179,15 @@ export function Navbar() {
         style={headerStyle}
       >
         <nav
-          className="relative mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center will-change-[height,background,border-radius,box-shadow]"
+          className={clsx(
+            "relative mx-auto w-full items-center",
+            isMobile
+              ? "flex justify-between"
+              : "grid grid-cols-[1fr_auto_1fr] will-change-[height,background,border-radius,box-shadow]"
+          )}
           style={navStyle}
         >
-          <div className="flex items-center justify-start">
+          <div className="flex shrink-0 items-center justify-start">
             <Link
               href="/"
               className="rounded-sm hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]"
@@ -200,7 +215,7 @@ export function Navbar() {
                 </span>
                 <Link
                   href={href}
-                  className={clsx(navLinkClass(isOnHero), "col-start-1 row-start-1")}
+                  className={clsx(navLinkClass(useHeroChrome), "col-start-1 row-start-1")}
                   onClick={(e) => handleAnchorClick(e, href)}
                 >
                   {label}
@@ -209,10 +224,10 @@ export function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center justify-end">
+          <div className="flex shrink-0 items-center justify-end">
             <Link
               href="/#meet-the-team"
-              className={clsx(ctaClass(isOnHero), "hidden md:inline-flex")}
+              className={clsx(ctaClass(useHeroChrome), "hidden md:inline-flex")}
               onClick={(e) => handleAnchorClick(e, "/#meet-the-team")}
             >
               Talk to our team
@@ -221,7 +236,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="relative z-[70] rounded-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:hidden"
+              className="relative z-[70] flex h-10 w-10 shrink-0 items-center justify-center rounded-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:hidden"
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
             >
@@ -233,6 +248,7 @@ export function Navbar() {
                   alt=""
                   width={28}
                   height={28}
+                  className="h-7 w-7"
                 />
               )}
             </button>
@@ -248,7 +264,7 @@ export function Navbar() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.62, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col bg-black/72 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-black/35 backdrop-blur-md md:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation menu"

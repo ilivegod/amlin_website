@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { HeroBackground } from "@/components/hero/HeroBackground";
+import { RevealTitle } from "@/components/RevealTitle";
 import { CapabilitiesSection } from "./components/CapabilitiesSection";
 // import Challenge from "./components/Challenge";
 import { HeroParallax } from "./components/HeroParallax";
@@ -49,15 +50,13 @@ export default function Home() {
             Amlin Technologies
           </p>
 
-          <h1 className="font-polysans text-[clamp(2.25rem,6.8vw,5.75rem)] font-extrabold leading-[0.94] tracking-[-0.035em] text-white">
-            {headlineLines.map((line, index) => (
-              <span key={line} className="amlin-line">
-                <span style={{ animationDelay: `${0.1 + index * 0.14}s` }}>
-                  {line}
-                </span>
-              </span>
-            ))}
-          </h1>
+          <RevealTitle
+            as="h1"
+            lines={headlineLines}
+            variant="inherit"
+            className="font-polysans text-[clamp(2.25rem,6.8vw,5.75rem)] font-extrabold leading-[0.94] tracking-[-0.035em] text-white"
+            ariaLabel="Custom technology that works from day one."
+          />
 
           <p
             className="amlin-fade mt-5 max-w-[30rem] font-inter text-[clamp(0.875rem,1.1vw,1.0625rem)] font-normal leading-[1.55] text-white/[0.72] md:mt-6"

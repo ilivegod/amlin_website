@@ -17,6 +17,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
+import { RevealTitle } from "@/components/RevealTitle";
 
 const industries: {
   name: string;
@@ -64,9 +65,11 @@ const BORDER_FILL_END = 0.9;
 export function IndustrySolutionsIntro() {
   return (
     <>
-      <h2 className="max-w-3xl font-polysans text-[clamp(2.25rem,5.4vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.03em] text-white">
-        Industry Solutions
-      </h2>
+      <RevealTitle
+        as="h2"
+        text="Industry Solutions"
+        className="max-w-3xl font-polysans text-[clamp(2.25rem,5.4vw,4.75rem)] font-extrabold leading-[0.98] tracking-[-0.03em]"
+      />
       <p className="mt-6 max-w-2xl font-inter text-[clamp(1.0625rem,1.55vw,1.3125rem)] font-normal leading-[1.65] text-white/60">
         Every industry faces unique challenges and we&apos;re here to meet them
         head-on. From streamlining operations to unlocking new revenue streams,

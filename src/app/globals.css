@@ -399,14 +399,6 @@
     linear-gradient(90deg, #050505 0%, #101010 38%, #1a1a1a 72%, #2a2a2a 100%);
 }
 
-.work-page-grid {
-  background-color: #050505;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
 .work-grid-line {
   border-color: #2a2a2a;
 }

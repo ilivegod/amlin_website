@@ -5,11 +5,9 @@ import { ProjectRow } from "./ProjectRow";
 
 export function FeaturedProjectsSection() {
   return (
-    <section className="work-page-grid relative w-full">
-      <div className="border-b work-grid-line px-[var(--hero-gutter)] pb-10 pt-24 md:pb-12 md:pt-28">
-        <div className="mx-auto w-full max-w-[1400px]">
-          <FeaturedProjectsTitle />
-        </div>
+    <section className="relative w-full bg-[#050505] px-[var(--hero-gutter)] pb-24">
+      <div className="border-b work-grid-line pb-10 pt-24 md:pb-12 md:pt-28">
+        <FeaturedProjectsTitle />
       </div>
 
       <div className="w-full">

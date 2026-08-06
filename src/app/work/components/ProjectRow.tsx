@@ -41,18 +41,18 @@ export function ProjectRow({ project }: ProjectRowProps) {
   const isExternal = project.href.startsWith("http");
 
   const content = (
-    <article className="group grid w-full grid-cols-1 border-b work-grid-line lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="relative w-full border-b work-grid-line lg:border-b-0 lg:border-r">
+    <article className="group grid w-full grid-cols-1 border-b work-grid-line py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="relative w-full border-b work-grid-line p-4 md:p-6 lg:border-b-0 lg:border-r lg:py-0 lg:pr-8">
         {reduceMotion ? (
           <div
-            className="aspect-[16/10] w-full"
+            className="aspect-[16/10] w-full overflow-hidden rounded-sm"
             style={{ background: project.media.gradient }}
             role="img"
             aria-label={project.media.alt}
           />
         ) : (
           <motion.div
-            className="aspect-[16/10] w-full transition-transform duration-500 group-hover:scale-[1.005]"
+            className="aspect-[16/10] w-full overflow-hidden rounded-sm transition-transform duration-500 group-hover:scale-[1.005]"
             style={{ background: project.media.gradient }}
             role="img"
             aria-label={project.media.alt}
@@ -64,10 +64,10 @@ export function ProjectRow({ project }: ProjectRowProps) {
         )}
       </div>
 
-      <div className="grid min-h-[280px] grid-rows-[1fr_auto] lg:min-h-[420px]">
+      <div className="grid min-h-[280px] grid-rows-[1fr_auto] lg:min-h-[420px] lg:pl-2">
         {reduceMotion ? (
           <>
-            <div className="grid grid-cols-1 gap-6 border-b work-grid-line p-6 md:p-8 lg:grid-cols-2 lg:gap-8">
+            <div className="grid grid-cols-1 gap-6 p-6 md:p-8 lg:grid-cols-2 lg:gap-8">
               <p className="font-inter text-sm leading-relaxed text-white/65 md:text-[0.9375rem]">
                 {project.description}
               </p>
@@ -90,7 +90,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
         ) : (
           <>
             <motion.div
-              className="grid grid-cols-1 gap-6 border-b work-grid-line p-6 md:p-8 lg:grid-cols-2 lg:gap-8"
+              className="grid grid-cols-1 gap-6 p-6 md:p-8 lg:grid-cols-2 lg:gap-8"
               initial="hidden"
               whileInView="visible"
               viewport={viewport}

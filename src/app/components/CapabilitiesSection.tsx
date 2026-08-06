@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
+import { RevealTitle } from "@/components/RevealTitle";
+
 const capabilities = [
   { id: "digital-transformation", label: "Digital Transformation," },
   { id: "workflow-ai", label: "Workflow & AI Automation," },
@@ -87,22 +89,38 @@ export function CapabilitiesSection() {
               animate={motionState}
               transition={isIdle ? resetSpring : hoverSpring}
               className={[
-                "relative w-full cursor-pointer border-0 bg-transparent py-2 text-center text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[1.12] tracking-[-0.02em] outline-none transition-[font-family,font-weight] duration-300 md:py-2.5",
+                "relative w-full cursor-pointer border-0 bg-transparent py-2 text-center text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[1.12] tracking-[-0.02em] outline-none transition-[font-family,font-weight,color] duration-300 md:py-2.5",
                 isActive
-                  ? "font-polysans font-extrabold text-white"
-                  : "font-inter font-semibold text-white/40",
+                  ? "font-polysans font-extrabold"
+                  : "font-inter font-semibold",
                 "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]",
               ].join(" ")}
               style={{ zIndex: isActive ? 10 : 1 }}
             >
               {"multiline" in item && item.multiline ? (
-                <>
-                  Systems Integration & Cloud
-                  <br />
-                  Engineering,
-                </>
+                <RevealTitle
+                  as="span"
+                  variant="inherit"
+                  lines={["Systems Integration & Cloud", "Engineering,"]}
+                  startDelay={index * 0.08}
+                  className={
+                    isActive
+                      ? "text-white"
+                      : "text-[#b0b0b0]/55"
+                  }
+                />
               ) : (
-                item.label
+                <RevealTitle
+                  as="span"
+                  variant="inherit"
+                  lines={[item.label]}
+                  startDelay={index * 0.08}
+                  className={
+                    isActive
+                      ? "text-white"
+                      : "text-[#b0b0b0]/55"
+                  }
+                />
               )}
 
               <motion.span

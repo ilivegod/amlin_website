@@ -1,5 +1,6 @@
 "use client";
 
+import { RevealTitle } from "@/components/RevealTitle";
 import clsx from "clsx";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Users } from "lucide-react";
@@ -178,9 +179,11 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
           <span className="font-inter text-xs text-white/55">Testimonials</span>
         </div>
 
-        <h2 className="mt-8 font-polysans text-[clamp(2.25rem,5.2vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-white">
-        Trusted by partners who expect more
-        </h2>
+        <RevealTitle
+          as="h2"
+          text="Trusted by partners who expect more"
+          className="mt-8 font-polysans text-[clamp(2.25rem,5.2vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.03em]"
+        />
 
         <p className="mx-auto mt-5 max-w-xl font-inter text-sm leading-relaxed text-white/45 md:text-base">
           Real Stories. Real Results. Straight From

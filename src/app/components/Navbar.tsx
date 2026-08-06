@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState, type CSSProperties, type MouseEvent } from "react";
 
 const links = [
-  { href: "/solutions", label: "Work" },
+  { href: "/work", label: "Work" },
   { href: "/services", label: "Services" },
   { href: "/#industry-solutions", label: "Industries" },
   { href: "/about", label: "About" },
@@ -45,11 +45,14 @@ function handleAnchorClick(
   document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
 }
 
-const navLinkClass = clsx(
-  "rounded-sm font-inter text-sm font-medium text-white/[0.66]",
-  "transition-all duration-300 ease-out hover:font-semibold hover:text-white",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-);
+const navLinkClass = (onHero: boolean) =>
+  clsx(
+    "rounded-sm font-inter text-sm font-medium transition-all duration-300 ease-out hover:font-semibold",
+    "focus-visible:outline-none focus-visible:ring-2",
+    onHero
+      ? "text-white/72 hover:text-white focus-visible:ring-[var(--amlin-accent)]"
+      : "text-white/[0.66] hover:text-white focus-visible:ring-white/60"
+  );
 
 const mobileNavLinkClass = clsx(
   "font-polysans text-[clamp(2.25rem,9vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white",
@@ -57,20 +60,23 @@ const mobileNavLinkClass = clsx(
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-sm"
 );
 
-const ctaClass = clsx(
-  "amlin-trace items-center rounded-full border border-white/16 bg-black/35 px-[1.15rem] py-[0.6rem] backdrop-blur-[6px]",
-  "font-inter text-sm font-semibold text-white/90 transition-all duration-300 ease-out",
-  "hover:cursor-pointer hover:border-white/50 hover:text-white",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-);
+const ctaClass = (onHero: boolean) =>
+  clsx(
+    "amlin-trace items-center rounded-full border px-[1.15rem] py-[0.6rem] backdrop-blur-[6px]",
+    "font-inter text-sm font-semibold transition-all duration-300 ease-out",
+    "hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2",
+    onHero
+      ? "border-white/28 bg-white/14 text-white hover:border-[var(--amlin-accent)] hover:bg-white/22 focus-visible:ring-[var(--amlin-accent)]"
+      : "border-white/16 bg-black/35 text-white/90 hover:border-white/50 hover:text-white focus-visible:ring-white/60"
+  );
 
-function getNavStyles(progress: number): {
+function getNavStyles(progress: number, onHero: boolean): {
   header: CSSProperties;
   nav: CSSProperties;
 } {
   const p = clamp01(progress);
-  const blur = lerp(0, 22, p);
-  const radius = lerp(0, 22, p);
+  const blur = lerp(onHero ? 0 : 0, 22, p);
+  const radius = lerp(onHero ? 0 : 0, 22, p);
 
   return {
     header: {
@@ -81,12 +87,37 @@ function getNavStyles(progress: number): {
       height: lerp(NAV_HEIGHT_IDLE, NAV_HEIGHT_COMPACT, p),
       maxWidth: p <= 0 ? "100%" : `min(100%, ${lerp(100, 72, p)}rem)`,
       borderRadius: radius,
-      backgroundColor: `rgba(0, 0, 0, ${lerp(0, 0.52, p)})`,
+      backgroundColor: onHero
+        ? `rgba(8, 32, 68, ${lerp(0, 0.55, p)})`
+        : `rgba(0, 0, 0, ${lerp(0, 0.52, p)})`,
       backdropFilter: `blur(${blur}px)`,
       WebkitBackdropFilter: `blur(${blur}px)`,
-      boxShadow: `0 ${lerp(0, 12, p)}px ${lerp(0, 44, p)}px rgba(0, 0, 0, ${lerp(0, 0.38, p)})`,
+      boxShadow: onHero
+        ? `0 ${lerp(0, 12, p)}px ${lerp(0, 36, p)}px rgba(4, 20, 48, ${lerp(0, 0.28, p)})`
+        : `0 ${lerp(0, 12, p)}px ${lerp(0, 44, p)}px rgba(0, 0, 0, ${lerp(0, 0.38, p)})`,
       paddingLeft: lerp(0, 24, p),
       paddingRight: lerp(0, 24, p),
+    },
+  };
+}
+
+function getWorkNavStyles(): { header: CSSProperties; nav: CSSProperties } {
+  return {
+    header: {
+      top: 24,
+      paddingTop: 0,
+    },
+    nav: {
+      height: NAV_HEIGHT_COMPACT,
+      maxWidth: "min(100%, 72rem)",
+      borderRadius: 22,
+      border: "1px solid rgba(255, 255, 255, 0.1)",
+      backgroundColor: "rgba(0, 0, 0, 0.52)",
+      backdropFilter: "blur(22px)",
+      WebkitBackdropFilter: "blur(22px)",
+      boxShadow: "0 12px 44px rgba(0, 0, 0, 0.38)",
+      paddingLeft: 24,
+      paddingRight: 24,
     },
   };
 }
@@ -96,8 +127,12 @@ export function Navbar() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isWork = pathname === "/work";
   const progress = isHome ? scrollProgress : 1;
-  const { header: headerStyle, nav: navStyle } = getNavStyles(progress);
+  const isOnHero = (isHome && progress < 0.55) || isWork;
+  const { header: headerStyle, nav: navStyle } = isWork
+    ? getWorkNavStyles()
+    : getNavStyles(progress, isOnHero);
 
   useEffect(() => {
     if (!isHome) {
@@ -134,75 +169,73 @@ export function Navbar() {
         style={headerStyle}
       >
         <nav
-          className="relative mx-auto flex w-full items-center will-change-[height,background,border-radius,box-shadow]"
+          className="relative mx-auto grid w-full grid-cols-[1fr_auto_1fr] items-center will-change-[height,background,border-radius,box-shadow]"
           style={navStyle}
         >
-          <div className="flex w-full items-center">
-            <div className="flex flex-1 items-center">
-              <Link
-                href="/"
-                className="rounded-sm hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
-                onClick={closeMenu}
-              >
+          <div className="flex items-center justify-start">
+            <Link
+              href="/"
+              className="rounded-sm hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]"
+              onClick={closeMenu}
+            >
+              <Image
+                className="h-6 w-auto md:h-7"
+                src="/svg/logo.svg"
+                alt="Amlin Technologies logo"
+                width={166}
+                height={37}
+                priority
+              />
+            </Link>
+          </div>
+
+          <ul className="hidden items-center justify-center gap-[clamp(1.25rem,2.6vw,2.5rem)] md:flex">
+            {links.map(({ href, label }) => (
+              <li key={href} className="grid list-none justify-items-center">
+                <span
+                  aria-hidden="true"
+                  className="invisible col-start-1 row-start-1 font-inter text-sm font-semibold"
+                >
+                  {label}
+                </span>
+                <Link
+                  href={href}
+                  className={clsx(navLinkClass(isOnHero), "col-start-1 row-start-1")}
+                  onClick={(e) => handleAnchorClick(e, href)}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex items-center justify-end">
+            <Link
+              href="/#meet-the-team"
+              className={clsx(ctaClass(isOnHero), "hidden md:inline-flex")}
+              onClick={(e) => handleAnchorClick(e, "/#meet-the-team")}
+            >
+              Talk to our team
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="relative z-[70] rounded-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:hidden"
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+            >
+              {menuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
                 <Image
-                  className="h-6 w-auto md:h-7"
-                  src="/svg/logo.svg"
-                  alt="Amlin Technologies logo"
-                  width={166}
-                  height={37}
-                  priority
+                  src="/svg/hamburgerMenu.svg"
+                  alt=""
+                  width={28}
+                  height={28}
                 />
-              </Link>
-            </div>
-
-            <ul className="hidden items-center gap-[clamp(1.25rem,2.6vw,2.5rem)] md:flex">
-              {links.map(({ href, label }) => (
-                <li key={href} className="grid list-none justify-items-center">
-                  <span
-                    aria-hidden="true"
-                    className="invisible col-start-1 row-start-1 font-inter text-sm font-semibold"
-                  >
-                    {label}
-                  </span>
-                  <Link
-                    href={href}
-                    className={clsx(navLinkClass, "col-start-1 row-start-1")}
-                    onClick={(e) => handleAnchorClick(e, href)}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-1 items-center justify-end">
-              <Link
-                href="/#challenge"
-                className={clsx(ctaClass, "hidden md:inline-flex")}
-                onClick={(e) => handleAnchorClick(e, "/#challenge")}
-              >
-                Talk to our team
-              </Link>
-
-              <button
-                type="button"
-                onClick={() => setMenuOpen((open) => !open)}
-                className="relative z-[70] rounded-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 md:hidden"
-                aria-expanded={menuOpen}
-                aria-label={menuOpen ? "Close menu" : "Open menu"}
-              >
-                {menuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Image
-                    src="/svg/hamburgerMenu.svg"
-                    alt=""
-                    width={28}
-                    height={28}
-                  />
-                )}
-              </button>
-            </div>
+              )}
+            </button>
           </div>
         </nav>
       </header>
@@ -280,10 +313,10 @@ export function Navbar() {
                 className="pt-4"
               >
                 <Link
-                  href="/#challenge"
-                  className={clsx(ctaClass, "inline-flex")}
+                  href="/#meet-the-team"
+                  className={clsx(ctaClass(false), "inline-flex")}
                   onClick={(e) =>
-                    handleAnchorClick(e, "/#challenge", closeMenu)
+                    handleAnchorClick(e, "/#meet-the-team", closeMenu)
                   }
                 >
                   Talk to our team
@@ -294,7 +327,7 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      {!isHome && (
+      {!isHome && !isWork && (
         <div
           className="pointer-events-none h-[calc(var(--nav-h)+0.75rem)]"
           aria-hidden="true"

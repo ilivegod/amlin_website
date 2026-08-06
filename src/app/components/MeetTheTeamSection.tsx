@@ -19,18 +19,18 @@ export function MeetTheTeamSection() {
   return (
     <section
       id="meet-the-team"
-      className="bg-white px-[var(--hero-gutter)] py-24 md:py-28"
+      className="bg-[#050505] px-[var(--hero-gutter)] py-24 md:py-28"
     >
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto w-full max-w-[52rem]">
-          <h2 className="font-polysans text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-[#050505]">
+          <h2 className="font-polysans text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-white">
             Meet the Team
           </h2>
 
           <div className="mt-14 grid grid-cols-1 gap-14 md:mt-16 md:grid-cols-2 md:gap-x-12 md:gap-y-0">
             {team.map((member) => (
               <article key={member.name} className="flex w-full flex-col">
-                <div className="relative aspect-square w-full overflow-hidden bg-[#f2f2f2]">
+                <div className="relative aspect-square w-full overflow-hidden bg-[#141414]">
                   <Image
                     src={member.image}
                     alt={member.name}
@@ -40,11 +40,11 @@ export function MeetTheTeamSection() {
                   />
                 </div>
 
-                <h3 className="mt-6 w-full font-inter text-[clamp(1.125rem,2vw,1.375rem)] font-bold leading-snug text-[#050505]">
+                <h3 className="mt-6 w-full font-inter text-[clamp(1.125rem,2vw,1.375rem)] font-bold leading-snug text-white">
                   {member.name}, {member.role}
                 </h3>
 
-                <p className="mt-4 w-full font-inter text-[0.9375rem] leading-relaxed text-[#333333] md:text-base">
+                <p className="mt-4 w-full font-inter text-[0.9375rem] leading-relaxed text-white/60 md:text-base">
                   {member.bio}
                 </p>
               </article>

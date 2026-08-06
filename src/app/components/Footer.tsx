@@ -75,7 +75,7 @@ export function Footer() {
     },
   });
   return (
-    <div className="min-h-screen relative mx-auto bg-[#050505] text-white md:items-center md:px-0 px-4 md:pt-28 pt-14  flex flex-col">
+    <div className="relative mx-auto flex min-h-screen flex-col border-t border-[#2a2a2a] bg-[#050505] px-4 pt-14 text-white md:items-center md:px-0 md:pt-28">
       <div className="grid md:grid-cols-3 grid-cols-1  md:w-3/4">
         {/* left side */}
         <div className="flex flex-col gap-6  items-left ">
@@ -212,10 +212,10 @@ export function Footer() {
                   Services
                 </Link>
                 <Link
-                  href="/solutions"
+                  href="/work"
                   className="text-white/80 hover:text-white text-sm  transition-colors"
                 >
-                  Solutions
+                  Work
                 </Link>
                 <Link
                   href="#challenge"

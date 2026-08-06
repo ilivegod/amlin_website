@@ -18,9 +18,9 @@ export function IndustriesStrip({ delay = "0s" }: IndustriesStripProps) {
       {industries.map((industry) => (
         <p
           key={industry}
-          className="font-inter text-[0.625rem] uppercase tracking-[0.18em] text-white/[0.42]"
+          className="font-inter text-[0.625rem] uppercase tracking-[0.18em] text-white/[0.48]"
         >
-          <span aria-hidden="true" className="mr-2 opacity-50">
+          <span aria-hidden="true" className="mr-2 text-[var(--amlin-accent)] opacity-90">
             &mdash;
           </span>
           {industry}

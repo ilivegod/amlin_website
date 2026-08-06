@@ -144,7 +144,12 @@ void main() {
   float g = hash21(gl_FragCoord.xy * 1.7 + fract(T) * vec2(97.1, 61.7));
   col += (g - 0.5) * uGrain;
 
-  gl_FragColor = vec4(max(col, 0.0), 1.0);
+  float luma = dot(col, vec3(0.299, 0.587, 0.114));
+  vec3 blueLo = vec3(0.012, 0.04, 0.11);
+  vec3 blueHi = vec3(0.24, 0.56, 0.82);
+  col = mix(blueLo, blueHi, clamp(luma * 1.18, 0.0, 1.0));
+
+  gl_FragColor = vec4(col, 1.0);
 }
 `;
 

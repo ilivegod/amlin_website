@@ -7,6 +7,7 @@ import type { Project } from "@/data/projects";
 
 type ProjectRowProps = {
   project: Project;
+  isFirst?: boolean;
 };
 
 const viewport = { once: true, margin: "-10%" as const };
@@ -36,9 +37,17 @@ const textItemVariants = {
   },
 };
 
-export function ProjectRow({ project }: ProjectRowProps) {
+export function ProjectRow({ project, isFirst = false }: ProjectRowProps) {
   const reduceMotion = useReducedMotion();
   const isExternal = project.href.startsWith("http");
+
+  const revealProps = isFirst
+    ? { initial: "hidden" as const, animate: "visible" as const }
+    : {
+        initial: "hidden" as const,
+        whileInView: "visible" as const,
+        viewport,
+      };
 
   const content = (
     <article className="group grid w-full grid-cols-1 border-b work-grid-line py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr]">
@@ -56,10 +65,8 @@ export function ProjectRow({ project }: ProjectRowProps) {
             style={{ background: project.media.gradient }}
             role="img"
             aria-label={project.media.alt}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
             variants={mediaVariants}
+            {...revealProps}
           />
         )}
       </div>
@@ -91,10 +98,8 @@ export function ProjectRow({ project }: ProjectRowProps) {
           <>
             <motion.div
               className="grid grid-cols-1 gap-6 p-6 md:p-8 lg:grid-cols-2 lg:gap-8"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
               variants={textContainerVariants}
+              {...revealProps}
             >
               <motion.p
                 className="font-inter text-sm leading-relaxed text-white/65 md:text-[0.9375rem]"
@@ -112,10 +117,8 @@ export function ProjectRow({ project }: ProjectRowProps) {
 
             <motion.div
               className="flex items-center justify-between gap-4 p-6 md:p-8 md:pt-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
               variants={textItemVariants}
+              {...revealProps}
             >
               <p className="font-inter text-sm font-medium tracking-wide text-white/45">
                 {project.category}

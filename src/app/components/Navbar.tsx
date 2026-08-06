@@ -15,6 +15,7 @@ import { useLenis } from "lenis/react";
 import type Lenis from "lenis";
 
 const links = [
+  { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
   { href: "/services", label: "Services" },
   { href: "/solutions", label: "Industries" },

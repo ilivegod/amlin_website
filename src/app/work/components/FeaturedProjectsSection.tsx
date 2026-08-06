@@ -11,8 +11,12 @@ export function FeaturedProjectsSection() {
       </div>
 
       <div className="w-full">
-        {featuredProjects.map((project) => (
-          <ProjectRow key={project.id} project={project} />
+        {featuredProjects.map((project, index) => (
+          <ProjectRow
+            key={project.id}
+            project={project}
+            isFirst={index === 0}
+          />
         ))}
       </div>
     </section>

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ExternalLink } from "lucide-react";
+import Image from "next/image";
 
 import type { Project } from "@/data/projects";
 
@@ -49,25 +50,43 @@ export function ProjectRow({ project, isFirst = false }: ProjectRowProps) {
         viewport,
       };
 
+  const mediaClassName =
+    "aspect-[16/10] w-full overflow-hidden rounded-sm transition-transform duration-500 group-hover:scale-[1.005]";
+
+  const mediaContent = project.media.src ? (
+    <Image
+      src={project.media.src}
+      alt={project.media.alt}
+      fill
+      className="object-cover object-top"
+      sizes="(max-width: 1024px) 100vw, 60vw"
+      draggable={false}
+    />
+  ) : null;
+
   const content = (
     <article className="group grid w-full grid-cols-1 border-b work-grid-line py-10 md:py-14 lg:grid-cols-[1.15fr_0.85fr]">
       <div className="relative w-full border-b work-grid-line p-4 md:p-6 lg:border-b-0 lg:border-r lg:py-0 lg:pr-8">
         {reduceMotion ? (
           <div
-            className="aspect-[16/10] w-full overflow-hidden rounded-sm"
-            style={{ background: project.media.gradient }}
+            className={`relative ${mediaClassName}`}
+            style={project.media.src ? undefined : { background: project.media.gradient }}
             role="img"
             aria-label={project.media.alt}
-          />
+          >
+            {mediaContent}
+          </div>
         ) : (
           <motion.div
-            className="aspect-[16/10] w-full overflow-hidden rounded-sm transition-transform duration-500 group-hover:scale-[1.005]"
-            style={{ background: project.media.gradient }}
+            className={`relative ${mediaClassName}`}
+            style={project.media.src ? undefined : { background: project.media.gradient }}
             role="img"
             aria-label={project.media.alt}
             variants={mediaVariants}
             {...revealProps}
-          />
+          >
+            {mediaContent}
+          </motion.div>
         )}
       </div>
 

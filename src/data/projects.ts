@@ -6,6 +6,7 @@ export type Project = {
   href: string;
   media: {
     type: "image";
+    src?: string;
     gradient: string;
     alt: string;
   };
@@ -13,42 +14,31 @@ export type Project = {
 
 export const featuredProjects: Project[] = [
   {
-    id: "healthcare-platform",
-    title: "CareLink Platform",
+    id: "crossmed-ehr",
+    title: "CrossMed EHR",
     description:
-      "A secure telehealth and patient engagement platform built for scale — fast appointments, real-time records, and compliance-ready workflows for modern healthcare providers.",
-    category: "Healthcare & Platforms",
-    href: "#",
+      "A hospital-ready electronic health records platform that helps providers sign up, manage patient care, and streamline day-to-day operations — from scheduling and billing to telehealth and secure messaging.",
+    category: "Healthcare & EHR",
+    href: "https://crossmedehr.com/",
     media: {
       type: "image",
+      src: "/photos/crossmed-ehr.png",
       gradient: "linear-gradient(135deg, #0b2850 0%, #1a4d78 45%, #3d8fd1 100%)",
-      alt: "CareLink healthcare platform preview",
+      alt: "CrossMed EHR landing page preview",
     },
   },
   {
-    id: "logistics-dashboard",
-    title: "FleetPulse",
+    id: "gcgm-redditch",
+    title: "GCGM Redditch",
     description:
-      "An operations dashboard for logistics teams — live fleet tracking, route optimization, and dispatch tools that keep goods moving on time across multiple regions.",
-    category: "Transport & Analytics",
-    href: "#",
+      "A modern church website for Global Church of Grace Ministries — with a welcoming landing page, announcements, testimonies, and clear paths for visitors to explore services, get involved, and stay connected.",
+    category: "Church & Community",
+    href: "https://gcgm-redditch.org/",
     media: {
       type: "image",
+      src: "/photos/gcgm-redditch.png",
       gradient: "linear-gradient(135deg, #1a1028 0%, #3d1f6e 50%, #7c4dff 100%)",
-      alt: "FleetPulse logistics dashboard preview",
-    },
-  },
-  {
-    id: "real-estate-portal",
-    title: "EstateFlow",
-    description:
-      "A property management portal with virtual tours, tenant self-service, and digital contracts — designed to simplify transactions and elevate the client experience.",
-    category: "Real Estate & Web Apps",
-    href: "#",
-    media: {
-      type: "image",
-      gradient: "linear-gradient(135deg, #0d1f1a 0%, #1a4d3a 45%, #2dd4bf 100%)",
-      alt: "EstateFlow real estate portal preview",
+      alt: "GCGM Redditch church website preview",
     },
   },
 ];

@@ -18,7 +18,7 @@ export function AboutHashScroll() {
     sessionStorage.removeItem("scrollTo");
 
     let attempts = 0;
-    let timer: ReturnType<typeof setTimeout>;
+    let timer: number | undefined;
 
     const tryScroll = () => {
       const element = document.getElementById("contact");
@@ -35,7 +35,9 @@ export function AboutHashScroll() {
 
     timer = window.setTimeout(tryScroll, 100);
 
-    return () => window.clearTimeout(timer);
+    return () => {
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
   }, [lenis]);
 
   return null;

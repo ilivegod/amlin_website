@@ -5,6 +5,8 @@ import { useSyncExternalStore, type ReactNode } from "react";
 
 import "lenis/dist/lenis.css";
 
+import { RouteScrollReset } from "@/components/RouteScrollReset";
+
 function subscribeReducedMotion(onStoreChange: () => void) {
   const query = window.matchMedia("(prefers-reduced-motion: reduce)");
   query.addEventListener("change", onStoreChange);
@@ -31,7 +33,12 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
   );
 
   if (reduceMotion) {
-    return <>{children}</>;
+    return (
+      <>
+        <RouteScrollReset />
+        {children}
+      </>
+    );
   }
 
   return (
@@ -45,6 +52,7 @@ export function SmoothScroll({ children }: SmoothScrollProps) {
         touchMultiplier: 1.15,
       }}
     >
+      <RouteScrollReset />
       {children}
     </ReactLenis>
   );

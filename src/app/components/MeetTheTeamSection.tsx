@@ -14,7 +14,7 @@ const team = [
   {
     name: "Seka Bernard Junior",
     role: "Lead Developer",
-    image: "/photos/manWorking.png",
+    image: "/photos/sekaJunior.png",
     bio: "Seka is a talented AI and software engineer,he leads engineering across Amlin's products; from architecture to delivery. He turns complex requirements into reliable, scalable systems and keeps every project moving with clarity, speed, and craft.",
   },
 ] as const;

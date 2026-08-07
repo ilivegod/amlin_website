@@ -1,48 +1,11 @@
 "use client";
 
 import { RevealTitle } from "@/components/RevealTitle";
+import { getInitials, testimonials } from "@/data/testimonials";
 import clsx from "clsx";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Users } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-
-const testimonials = [
-  {
-    name: "Rosina Andor",
-    role: "Tech Lead, Healthcare Partner",
-    quote:
-      "Partnering with Amlin was a game-changer. In just six months, they helped us cut system downtime by 30% and doubled our automation capacity. Their team brought clarity, speed, and serious results.",
-    image: "/photos/portrait-cheerful-black-woman.png",
-  },
-  {
-    name: "Phillipe Nadeau",
-    role: "Co-Founder of Heave Corp",
-    quote:
-      "The new platform showcases everything Heave Corp stands for. Amlin's innovative designs and attention to detail positioned us as leaders, making a noticeable impact on our audience and partners.",
-    image: "/photos/portrait-cheerful-black-woman.png",
-  },
-  {
-    name: "Jonah Richards",
-    role: "CEO of REV Productions",
-    quote:
-      "Our internal systems are a game-changer thanks to the incredible work of Amlin. Their creativity, attention to detail, and technical expertise brought our vision to life beyond expectations.",
-    image: "/photos/portrait-cheerful-black-woman.png",
-  },
-  {
-    name: "Hof Coral",
-    role: "CEO of Berco Inc",
-    quote:
-      "Working with Amlin was seamless. They took time to understand our needs, delivering a clean, functional product that impressed clients and partners. We're thrilled with the results!",
-    image: "/photos/portrait-cheerful-black-woman.png",
-  },
-  {
-    name: "Kennedy M",
-    role: "President of Essentia Safari",
-    quote:
-      "Essentia Safari's new digital platform is a masterpiece. It captures our brand perfectly, thanks to Amlin's expertise and passion. Our clients love it, and it's transformed how we connect.",
-    image: "/photos/portrait-cheerful-black-woman.png",
-  },
-] as const;
 
 type TestimonialsSectionProps = {
   className?: string;
@@ -50,7 +13,12 @@ type TestimonialsSectionProps = {
 
 export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const dragState = useRef({
+    active: false,
+    startX: 0,
+    scrollLeft: 0,
+    pointerId: -1,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -135,7 +103,19 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
     scrollToIndex(nextIndex);
   };
 
+  const releasePointer = (track: HTMLDivElement, pointerId: number) => {
+    try {
+      if (track.hasPointerCapture(pointerId)) {
+        track.releasePointerCapture(pointerId);
+      }
+    } catch {
+      // Pointer may already be released during native touch scrolling.
+    }
+  };
+
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+
     const track = trackRef.current;
     if (!track) return;
 
@@ -143,6 +123,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
       active: true,
       startX: event.clientX,
       scrollLeft: track.scrollLeft,
+      pointerId: event.pointerId,
     };
     setIsDragging(true);
     track.setPointerCapture(event.pointerId);
@@ -151,6 +132,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const track = trackRef.current;
     if (!track || !dragState.current.active) return;
+    if (event.pointerId !== dragState.current.pointerId) return;
 
     const delta = event.clientX - dragState.current.startX;
     track.scrollLeft = dragState.current.scrollLeft - delta;
@@ -159,10 +141,13 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
   const endDrag = (event: React.PointerEvent<HTMLDivElement>) => {
     const track = trackRef.current;
     if (!track || !dragState.current.active) return;
+    if (event.pointerId !== dragState.current.pointerId) return;
 
+    const { pointerId } = dragState.current;
     dragState.current.active = false;
+    dragState.current.pointerId = -1;
     setIsDragging(false);
-    track.releasePointerCapture(event.pointerId);
+    releasePointer(track, pointerId);
     updateScrollState();
   };
 
@@ -199,11 +184,12 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={endDrag}
+          onPointerCancel={endDrag}
           onPointerLeave={endDrag}
           className={[
             "testimonial-track flex gap-5 overflow-x-auto px-[var(--hero-gutter)] pb-2",
             "snap-x snap-mandatory scroll-smooth",
-            isDragging ? "cursor-grabbing select-none" : "cursor-grab",
+            isDragging ? "cursor-grabbing select-none" : "cursor-grab md:cursor-grab",
           ].join(" ")}
         >
           {testimonials.map((item) => (
@@ -213,15 +199,21 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
               className="testimonial-card relative flex min-h-[22rem] w-[min(88vw,26rem)] shrink-0 snap-center flex-col rounded-[1.35rem] border border-white/[0.06] bg-[#0c0c0c] p-7 md:min-h-[24rem] md:w-[26rem] md:p-8"
             >
               <div className="flex flex-col items-start text-left">
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-white/10 bg-[#141414] md:size-16">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    fill
-                    className="object-cover"
-                    sizes="64px"
-                    draggable={false}
-                  />
+                <div className="relative flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-[#141414] md:size-16">
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                      draggable={false}
+                    />
+                  ) : (
+                    <span className="font-inter text-sm font-semibold text-white/80 md:text-base">
+                      {getInitials(item.name)}
+                    </span>
+                  )}
                 </div>
 
                 <h3 className="mt-5 font-inter text-lg font-semibold text-white">

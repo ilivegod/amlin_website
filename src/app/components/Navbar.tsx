@@ -10,7 +10,7 @@ import { useEffect, useState, type CSSProperties, type MouseEvent } from "react"
 
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { ContactLink } from "@/components/ContactLink";
-import { smoothScrollToId } from "@/lib/smooth-scroll";
+import { smoothScrollToId, scrollToTop } from "@/lib/smooth-scroll";
 import { useLenis } from "lenis/react";
 import type Lenis from "lenis";
 
@@ -34,6 +34,19 @@ function clamp01(value: number) {
 
 function lerp(start: number, end: number, progress: number) {
   return start + (end - start) * progress;
+}
+
+function handleHomeClick(
+  e: MouseEvent<HTMLAnchorElement>,
+  pathname: string,
+  lenis: Lenis | null | undefined,
+  onNavigate?: () => void
+) {
+  if (pathname !== "/") return;
+
+  e.preventDefault();
+  onNavigate?.();
+  scrollToTop(lenis, { immediate: false, duration: 1.35 });
 }
 
 function handleAnchorClick(
@@ -226,7 +239,7 @@ export function Navbar() {
             <Link
               href="/"
               className="rounded-sm hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]"
-              onClick={closeMenu}
+              onClick={(e) => handleHomeClick(e, pathname, lenis, closeMenu)}
             >
               <Image
                 className="h-6 w-auto md:h-7"
@@ -260,7 +273,13 @@ export function Navbar() {
                     navLinkClass(useHeroChrome, isActive),
                     "col-start-1 row-start-1"
                   )}
-                  onClick={(e) => handleAnchorClick(e, href, lenis)}
+                  onClick={(e) => {
+                    if (href === "/") {
+                      handleHomeClick(e, pathname, lenis);
+                      return;
+                    }
+                    handleAnchorClick(e, href, lenis);
+                  }}
                   aria-current={isActive ? "page" : undefined}
                 >
                   {label}
@@ -356,6 +375,10 @@ export function Navbar() {
                     href={link.href}
                     className={mobileNavLinkClass(isActive)}
                     onClick={(e) => {
+                      if (link.href === "/") {
+                        handleHomeClick(e, pathname, lenis, closeMenu);
+                        return;
+                      }
                       handleAnchorClick(e, link.href, lenis, closeMenu);
                       if (!link.href.includes("#")) closeMenu();
                     }}

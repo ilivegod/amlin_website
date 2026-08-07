@@ -106,10 +106,15 @@ export function ProjectRow({ project, isFirst = false }: ProjectRowProps) {
                 {project.category}
               </p>
               {isExternal && (
-                <ExternalLink
-                  className="h-4 w-4 text-white/35"
-                  aria-hidden="true"
-                />
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${project.title}`}
+                  className="inline-flex rounded-sm text-white/35 transition-colors hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
               )}
             </div>
           </>
@@ -143,10 +148,15 @@ export function ProjectRow({ project, isFirst = false }: ProjectRowProps) {
                 {project.category}
               </p>
               {isExternal && (
-                <ExternalLink
-                  className="h-4 w-4 text-white/35 transition-colors group-hover:text-white/70"
-                  aria-hidden="true"
-                />
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${project.title}`}
+                  className="inline-flex rounded-sm text-white/35 transition-colors hover:text-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+                >
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
               )}
             </motion.div>
           </>
@@ -155,23 +165,9 @@ export function ProjectRow({ project, isFirst = false }: ProjectRowProps) {
     </article>
   );
 
-  if (project.href === "#") {
-    return (
-      <div className="block w-full" aria-label={`${project.title} — coming soon`}>
-        {content}
-      </div>
-    );
-  }
-
   return (
-    <a
-      href={project.href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
-      className="block w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
-      aria-label={`View ${project.title}`}
-    >
+    <div className="block w-full">
       {content}
-    </a>
+    </div>
   );
 }

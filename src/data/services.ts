@@ -3,56 +3,103 @@ export type Service = {
   icon: string;
   iconAlt: string;
   title: string;
-  description: string;
+  tagline: string;
+  highlights: string[];
 };
 
 export const services: Service[] = [
   {
     number: "01",
-    icon: "/svg/digitalTransformation.svg",
-    iconAlt: "Digital Transformation icon",
-    title: "Digital Transformation",
-    description:
-      "We help businesses rethink and digitize operations with strategy-driven solutions that boost agility, cut costs, and create value in a digital-first world.",
+    icon: "/svg/design.svg",
+    iconAlt: "Websites and online presence icon",
+    title: "Websites & Online Presence",
+    tagline: "Turn your first impression into an advantage.",
+    highlights: [
+      "Business websites",
+      "E-commerce stores",
+      "Landing pages",
+      "Customer portals",
+      "Website redesigns",
+    ],
   },
   {
     number: "02",
     icon: "/svg/AI.svg",
-    iconAlt: "Workflow and AI Automation icon",
-    title: "Workflow & AI Automation",
-    description:
-      "We streamline repetitive processes and unlock efficiency with intelligent automation and AI, freeing teams to focus on high-value, strategic work.",
+    iconAlt: "Business automation icon",
+    title: "Business Automation",
+    tagline: "Work smarter by reducing repetitive tasks.",
+    highlights: [
+      "Automated customer follow-ups",
+      "Approval processes",
+      "Data entry automation",
+      "Business workflows",
+      "AI-powered assistants",
+    ],
   },
   {
     number: "03",
-    icon: "/svg/design.svg",
-    iconAlt: "UX/UI and Product Design icon",
-    title: "UX/UI & Product Design",
-    description:
-      "We craft intuitive user experiences and clean, conversion-driven interfaces that make digital products not only usable, but unforgettable.",
+    icon: "/svg/digitalTransformation.svg",
+    iconAlt: "Custom software solutions icon",
+    title: "Custom Software Solutions",
+    tagline: "Technology built around how your business works.",
+    highlights: [
+      "Internal business systems",
+      "Customer platforms",
+      "Booking systems",
+      "Management dashboards",
+      "Industry-specific software",
+    ],
   },
   {
     number: "04",
-    icon: "/svg/data.svg",
-    iconAlt: "Data Systems and Analytics icon",
-    title: "Data Systems & Analytics",
-    description:
-      "We design data pipelines, dashboards, and analytics tools that turn raw data into real insights fueling better decisions and smarter strategies.",
+    icon: "/svg/cloud.svg",
+    iconAlt: "Business systems integration icon",
+    title: "Business Systems Integration",
+    tagline: "Make your tools work together.",
+    highlights: [
+      "Connecting CRM systems",
+      "Connecting payment platforms",
+      "Connecting business applications",
+      "Data synchronisation",
+    ],
   },
   {
     number: "05",
-    icon: "/svg/cloud.svg",
-    iconAlt: "Systems Integration and Cloud Engineering icon",
-    title: "Systems Integration & Cloud Engineering",
-    description:
-      "We connect platforms, migrate workloads, and build cloud-native systems that scale reliably without adding operational complexity.",
+    icon: "/svg/design.svg",
+    iconAlt: "Mobile applications icon",
+    title: "Mobile Applications",
+    tagline: "Bring your services closer to your customers.",
+    highlights: [
+      "Customer apps",
+      "Staff apps",
+      "Booking apps",
+      "Service platforms",
+    ],
   },
   {
     number: "06",
+    icon: "/svg/data.svg",
+    iconAlt: "Data and business insights icon",
+    title: "Data & Business Insights",
+    tagline: "Turn your data into better decisions.",
+    highlights: [
+      "Business dashboards",
+      "Reporting systems",
+      "Data analysis",
+      "Performance tracking",
+    ],
+  },
+  {
+    number: "07",
     icon: "/svg/cybersecurity.svg",
-    iconAlt: "Cybersecurity and Compliance icon",
-    title: "Cybersecurity & Compliance",
-    description:
-      "We secure your digital assets with advanced protection and ensure your systems meet compliance standards, reducing risk and boosting resilience.",
+    iconAlt: "Cloud and technology support icon",
+    title: "Cloud & Technology Support",
+    tagline: "Reliable technology that grows with your business.",
+    highlights: [
+      "Cloud solutions",
+      "Infrastructure support",
+      "Security improvements",
+      "Technology consulting",
+    ],
   },
 ];

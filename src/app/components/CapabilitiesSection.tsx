@@ -74,16 +74,14 @@ function getMobileItemMotion(
   reduceMotion: boolean
 ) {
   if (reduceMotion) {
-    return idleState;
+    return { scale: 1, opacity: 0.42 };
   }
 
   if (index === activeIndex) {
-    return { y: 0, x: 0, scale: 1.06, opacity: 1 };
+    return { scale: 1.06, opacity: 1 };
   }
 
   return {
-    y: 0,
-    x: 0,
     scale: 0.94,
     opacity: 0.34,
   };
@@ -110,7 +108,7 @@ export function CapabilitiesSection() {
   return (
     <section className="relative flex min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden bg-[#050505] px-[var(--hero-gutter)] py-12 md:min-h-dvh md:py-24">
       <div
-        className="relative flex w-full max-w-5xl flex-col items-center gap-0.5 md:gap-0"
+        className="relative flex w-full max-w-5xl flex-col items-center gap-3 md:gap-0 md:min-h-0 min-h-[23.5rem]"
         onMouseLeave={() => {
           if (!isMobile) setHoveredIndex(null);
         }}
@@ -122,11 +120,35 @@ export function CapabilitiesSection() {
         }}
       >
         {capabilities.map((item, index) => {
+          const isMultiline = "multiline" in item && item.multiline;
           const motionState = isMobile
             ? getMobileItemMotion(index, mobileActiveIndex, !!reduceMotion)
             : getItemMotion(index, hoveredIndex, !!reduceMotion);
           const isActive = activeIndex === index;
           const isIdle = !isMobile && hoveredIndex === null;
+
+          const titleContent =
+            isMultiline ? (
+              <RevealTitle
+                as="span"
+                variant="inherit"
+                lines={["Systems Integration & Cloud", "Engineering,"]}
+                startDelay={index * 0.08}
+                className={
+                  isActive ? "text-white" : "text-[#b0b0b0]/55"
+                }
+              />
+            ) : (
+              <RevealTitle
+                as="span"
+                variant="inherit"
+                lines={[item.label]}
+                startDelay={index * 0.08}
+                className={
+                  isActive ? "text-white" : "text-[#b0b0b0]/55"
+                }
+              />
+            );
 
           return (
             <motion.button
@@ -138,43 +160,34 @@ export function CapabilitiesSection() {
               onFocus={() => {
                 if (!isMobile) setHoveredIndex(index);
               }}
-              animate={motionState}
+              animate={isMobile ? undefined : motionState}
               transition={
                 isMobile ? mobileCycleSpring : isIdle ? resetSpring : hoverSpring
               }
               className={[
-                "relative w-full cursor-pointer border-0 bg-transparent py-1.5 text-center text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[1.12] tracking-[-0.02em] outline-none transition-[font-family,font-weight,color] duration-300 md:py-2.5",
-                isActive
+                "relative flex w-full cursor-pointer items-center justify-center border-0 bg-transparent text-center text-[clamp(1.75rem,4.8vw,3.75rem)] leading-[1.12] tracking-[-0.02em] outline-none transition-[font-family,font-weight,color] duration-300",
+                isMobile
+                  ? isMultiline
+                    ? "min-h-[5.5rem] py-0"
+                    : "min-h-[2.85rem] py-0"
+                  : "py-1.5 md:py-2.5",
+                isMobile || isActive
                   ? "font-polysans font-extrabold"
                   : "font-inter font-semibold",
                 "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]",
               ].join(" ")}
               style={{ zIndex: isActive ? 10 : 1 }}
             >
-              {"multiline" in item && item.multiline ? (
-                <RevealTitle
-                  as="span"
-                  variant="inherit"
-                  lines={["Systems Integration & Cloud", "Engineering,"]}
-                  startDelay={index * 0.08}
-                  className={
-                    isActive
-                      ? "text-white"
-                      : "text-[#b0b0b0]/55"
-                  }
-                />
+              {isMobile ? (
+                <motion.span
+                  className="inline-block origin-center will-change-transform"
+                  animate={motionState}
+                  transition={mobileCycleSpring}
+                >
+                  {titleContent}
+                </motion.span>
               ) : (
-                <RevealTitle
-                  as="span"
-                  variant="inherit"
-                  lines={[item.label]}
-                  startDelay={index * 0.08}
-                  className={
-                    isActive
-                      ? "text-white"
-                      : "text-[#b0b0b0]/55"
-                  }
-                />
+                titleContent
               )}
 
               <motion.span

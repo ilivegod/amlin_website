@@ -99,6 +99,50 @@ vec3 defocused(vec2 q, float coc, float seed) {
   return sqrt(acc / float(TAPS));
 }
 
+// Irregular storm-flash envelope — mostly quiet, occasional short bursts.
+float lightningBurst(float T) {
+  float cell = floor(T * 0.22);
+  float chance = hash21(vec2(cell, 17.3));
+  if (chance < 0.68) return 0.0;
+
+  float localT = fract(T * 0.22);
+  float peak = mix(0.18, 0.78, hash21(vec2(cell, 3.1)));
+  float d = abs(localT - peak);
+  float flash = exp(-d * 95.0);
+
+  // Occasional double flicker, like real lightning.
+  float flickerChance = hash21(vec2(cell, 91.0));
+  if (flickerChance > 0.5) {
+    float peak2 = peak + mix(0.018, 0.055, flickerChance);
+    flash += 0.5 * exp(-abs(localT - peak2) * 120.0);
+  }
+
+  return flash * mix(0.4, 1.0, hash21(vec2(cell, 5.7)));
+}
+
+// Soft glow behind the field — cloud-diffused, not a hard bolt.
+float stormGlow(vec2 uv, float T, float flash) {
+  if (flash < 0.004) return 0.0;
+
+  float cell = floor(T * 0.22);
+  vec2 center = vec2(
+    mix(-0.85, 0.85, hash21(vec2(cell, 2.2))),
+    mix(-0.15, 0.65, hash21(vec2(cell, 8.8)))
+  );
+
+  float falloff = mix(1.6, 2.8, hash21(vec2(cell, 4.4)));
+  float glow = exp(-length((uv - center) * vec2(1.05, 1.3)) * falloff);
+
+  vec2 center2 = center + vec2(
+    mix(-0.35, 0.35, hash21(vec2(cell, 1.1))),
+    mix(-0.2, 0.15, hash21(vec2(cell, 6.6)))
+  );
+  glow += 0.4 * exp(-length((uv - center2) * vec2(0.85, 1.15)) * 2.1);
+
+  float cloud = mix(0.5, 1.0, vnoise(uv * 1.8 + cell * 0.37));
+  return flash * glow * cloud;
+}
+
 void main() {
   vec2 uv = (gl_FragCoord.xy - 0.5 * uRes) / uRes.y;
   float T = uTime;
@@ -148,6 +192,14 @@ void main() {
   vec3 blueLo = vec3(0.008, 0.025, 0.075);
   vec3 blueHi = vec3(0.16, 0.42, 0.68);
   col = mix(blueLo, blueHi, clamp(luma * 1.18, 0.0, 1.0));
+
+  // Subtle lightning behind the field — soft, irregular, cloud-diffused.
+  float burst = lightningBurst(T);
+  float glow = stormGlow(uv, T, burst);
+  vec3 lightningTint = vec3(0.48, 0.68, 1.0);
+  col += lightningTint * glow * 0.18;
+  col += vec3(0.9, 0.95, 1.0) * glow * glow * 0.08;
+  col *= 1.0 + glow * 0.12;
 
   gl_FragColor = vec4(col, 1.0);
 }

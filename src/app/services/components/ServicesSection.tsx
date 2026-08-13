@@ -10,7 +10,7 @@ export function ServicesSection() {
         <RevealTitle
           as="h2"
           text="Services We Provide"
-          className="font-polysans text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+          className="font-jakarta text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
         />
       </div>
 

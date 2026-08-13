@@ -7,15 +7,20 @@ import { RevealTitle } from "@/components/RevealTitle";
 const team = [
   {
     name: "Godwin Ampaw",
-    role: "Founder",
-    image: "/photos/godwin-ampaw.png",
-    bio: "Godwin founded Amlin with a clear belief: technology should solve real problems from day one. He leads strategy, client partnerships, and the vision that keeps every build focused on outcomes, not overhead.",
+    role: "Founder & CEO",
+    image: "/photos/godwin-ampaw.jpg",
+    bio: [
+      "Godwin leads Amlin’s strategy, client partnerships, and technology delivery, helping businesses use technology to solve real operational and customer challenges.",
+      "With a background in digital transformation, health informatics, data analytics, and technology delivery, he founded Amlin to help organisations modernise and stay ahead as AI and digital technologies reshape how businesses operate.",
+    ],
   },
   {
     name: "Seka Bernard Junior",
-    role: "Lead Developer",
+    role: "Product Engineer",
     image: "/photos/sekaJunior.png",
-    bio: "Seka is a talented AI and software engineer,he leads engineering across Amlin's products; from architecture to delivery. He turns complex requirements into reliable, scalable systems and keeps every project moving with clarity, speed, and craft.",
+    bio: [
+      "Seka is a talented AI and software engineer. He leads engineering across Amlin's products; from architecture to delivery.",
+    ],
   },
 ] as const;
 
@@ -30,7 +35,7 @@ export function MeetTheTeamSection() {
           <RevealTitle
             as="h2"
             text="Meet the Team"
-            className="font-polysans text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em]"
+            className="font-jakarta text-[clamp(2rem,4.5vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em]"
           />
 
           <div className="mt-14 grid grid-cols-1 gap-14 md:mt-16 md:grid-cols-2 md:gap-x-12 md:gap-y-0">
@@ -41,18 +46,25 @@ export function MeetTheTeamSection() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover grayscale"
+                    className="object-cover object-top grayscale"
                     sizes="(max-width: 768px) 100vw, 400px"
                   />
                 </div>
                 <div className="mt-6 flex flex-col gap-2">
-                  <h3 className="font-polysans text-xl font-semibold text-white md:text-2xl">
+                  <h3 className="font-jakarta text-xl font-semibold text-white md:text-2xl">
                     {member.name}
                   </h3>
                   <p className="font-inter text-sm text-white/50">{member.role}</p>
-                  <p className="mt-2 font-inter text-sm leading-relaxed text-white/65 md:text-base">
-                    {member.bio}
-                  </p>
+                  <div className="mt-2 flex flex-col gap-3">
+                    {member.bio.map((paragraph) => (
+                      <p
+                        key={paragraph.slice(0, 40)}
+                        className="font-inter text-sm leading-relaxed text-white/65 md:text-base"
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </article>
             ))}

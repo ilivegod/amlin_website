@@ -5,7 +5,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useLenis } from "lenis/react";
 import type { ComponentProps, MouseEvent } from "react";
 
-import { smoothScrollToId } from "@/lib/smooth-scroll";
+import {
+  CONTACT_SCROLL_KEY,
+  smoothScrollToId,
+} from "@/lib/smooth-scroll";
 
 type ContactLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   href?: string;
@@ -35,8 +38,8 @@ export function ContactLink({
 
     event.preventDefault();
     onNavigate?.();
-    sessionStorage.setItem("scrollTo", "contact");
-    router.push("/about");
+    sessionStorage.setItem(CONTACT_SCROLL_KEY, "contact");
+    router.push("/about#contact");
   };
 
   return <Link href={href} onClick={handleClick} {...props} />;

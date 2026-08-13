@@ -47,14 +47,15 @@ function Challenge() {
 
         const result = await res.json();
 
-        if (result.success) {
-          form.reset();
+        if (!res.ok || !result.success) {
+          toast.warning("Something went wrong! Try again");
+          return;
         }
 
+        form.reset();
         toast.success(
           "Thanks for contacting us! A member of our team will be in touch shortly."
         );
-        form.reset();
       } catch (error) {
         console.error(error);
         toast.warning("Something went wrong! Try again");
@@ -70,7 +71,7 @@ function Challenge() {
     >
       <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 border-t work-grid-line pt-12 md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:pt-16">
         <div className="flex flex-col gap-6">
-          <h2 className="font-polysans text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-[#b0b0b0]">
+          <h2 className="font-jakarta text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-[#b0b0b0]">
             <span className="inline-flex flex-wrap items-center">
               We&apos;re l
               <FollowingEyes />
@@ -148,7 +149,7 @@ function Challenge() {
                   <Button
                     type="submit"
                     disabled={!canSubmit || isSubmitting}
-                    className="amlin-trace rounded-full border border-white/20 bg-white/10 px-6 py-5 font-inter text-sm font-semibold text-white backdrop-blur-sm hover:bg-white/16"
+                    className="amlin-cta-fill rounded-full border border-white/25 px-6 py-5 font-inter text-sm font-semibold text-white"
                   >
                     {isSubmitting ? "Submitting..." : "Get in touch"}
                     <ChevronRight className="ml-1 h-4 w-4" />

@@ -172,7 +172,7 @@ export function CapabilitiesSection() {
                     : "min-h-[2.85rem] py-0"
                   : "py-1.5 md:py-2.5",
                 isMobile || isActive
-                  ? "font-polysans font-extrabold"
+                  ? "font-jakarta font-extrabold"
                   : "font-inter font-semibold",
                 "focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]",
               ].join(" ")}

@@ -38,20 +38,6 @@ export const services: Service[] = [
   },
   {
     number: "03",
-    icon: "/svg/digitalTransformation.svg",
-    iconAlt: "Custom software solutions icon",
-    title: "Custom Software Solutions",
-    tagline: "Technology built around how your business works.",
-    highlights: [
-      "Internal business systems",
-      "Customer platforms",
-      "Booking systems",
-      "Management dashboards",
-      "Industry-specific software",
-    ],
-  },
-  {
-    number: "04",
     icon: "/svg/cloud.svg",
     iconAlt: "Business systems integration icon",
     title: "Business Systems Integration",
@@ -64,7 +50,7 @@ export const services: Service[] = [
     ],
   },
   {
-    number: "05",
+    number: "04",
     icon: "/svg/design.svg",
     iconAlt: "Mobile applications icon",
     title: "Mobile Applications",
@@ -77,7 +63,7 @@ export const services: Service[] = [
     ],
   },
   {
-    number: "06",
+    number: "05",
     icon: "/svg/data.svg",
     iconAlt: "Data and business insights icon",
     title: "Data & Business Insights",
@@ -90,7 +76,7 @@ export const services: Service[] = [
     ],
   },
   {
-    number: "07",
+    number: "06",
     icon: "/svg/cybersecurity.svg",
     iconAlt: "Cloud and technology support icon",
     title: "Cloud & Technology Support",

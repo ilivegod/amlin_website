@@ -31,7 +31,7 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
           className="h-5 w-5 brightness-0 invert opacity-90"
         />
       </div>
-      <h3 className="font-polysans text-lg font-semibold tracking-[-0.02em] text-white md:text-xl">
+      <h3 className="font-jakarta text-lg font-semibold tracking-[-0.02em] text-white md:text-xl">
         {service.title}
       </h3>
       <p className="font-inter text-sm leading-relaxed text-white/60 md:text-[0.9375rem]">

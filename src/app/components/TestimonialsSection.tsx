@@ -167,7 +167,8 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
         <RevealTitle
           as="h2"
           text="Trusted by partners who expect more"
-          className="mt-8 font-polysans text-[clamp(2.25rem,5.2vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.03em]"
+          align="center"
+          className="mt-8 font-jakarta text-[clamp(2.25rem,5.2vw,4.25rem)] font-extrabold leading-[1.02] tracking-[-0.03em]"
         />
 
         <p className="mx-auto mt-5 max-w-xl font-inter text-sm leading-relaxed text-white/45 md:text-base">
@@ -244,7 +245,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
             onClick={() => scrollByDirection(-1)}
             disabled={activeIndex === 0}
             aria-label="Previous testimonial"
-            className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 transition-colors hover:bg-white/[0.08] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+            className="amlin-cta-fill flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-35"
           >
             <ChevronLeft className="size-4" strokeWidth={1.75} />
           </button>
@@ -253,7 +254,7 @@ export function TestimonialsSection({ className }: TestimonialsSectionProps) {
             onClick={() => scrollByDirection(1)}
             disabled={activeIndex === testimonials.length - 1}
             aria-label="Next testimonial"
-            className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-white/70 transition-colors hover:bg-white/[0.08] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+            className="amlin-cta-fill flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-35"
           >
             <ChevronRight className="size-4" strokeWidth={1.75} />
           </button>

@@ -88,7 +88,7 @@ export function IndustrySolutionRow({
 
   const textBlock = reduceMotion ? (
     <div className="flex flex-col justify-center gap-4 p-6 md:p-8 lg:p-10">
-      <h3 className="font-polysans text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
+      <h3 className="font-jakarta text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
         {solution.title}
       </h3>
       <p className="max-w-lg font-inter text-sm leading-relaxed text-white/60 md:text-[0.9375rem]">
@@ -103,7 +103,7 @@ export function IndustrySolutionRow({
       viewport={viewport}
       variants={textVariants}
     >
-      <h3 className="font-polysans text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
+      <h3 className="font-jakarta text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
         {solution.title}
       </h3>
       <p className="max-w-lg font-inter text-sm leading-relaxed text-white/60 md:text-[0.9375rem]">

@@ -12,7 +12,7 @@ type IndustriesStripProps = {
 export function IndustriesStrip({ delay = "0s" }: IndustriesStripProps) {
   return (
     <div
-      className="amlin-fade flex flex-wrap items-center gap-x-[clamp(1rem,2.4vw,2.25rem)] gap-y-2"
+        className="amlin-fade flex flex-wrap items-center justify-center gap-x-[clamp(1rem,2.4vw,2.25rem)] gap-y-2"
       style={{ animationDelay: delay }}
     >
       {industries.map((industry) => (

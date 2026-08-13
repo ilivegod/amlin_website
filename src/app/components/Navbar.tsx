@@ -94,7 +94,7 @@ const navLinkClass = (onHero: boolean, isActive: boolean) =>
 
 const mobileNavLinkClass = (isActive: boolean) =>
   clsx(
-    "font-polysans text-[clamp(2.25rem,9vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white",
+    "font-jakarta text-[clamp(2.25rem,9vw,3.25rem)] font-bold leading-[1.05] tracking-[-0.02em] text-white",
     "transition-opacity duration-300 hover:opacity-70",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 rounded-sm",
     isActive &&
@@ -103,12 +103,12 @@ const mobileNavLinkClass = (isActive: boolean) =>
 
 const ctaClass = (onHero: boolean) =>
   clsx(
-    "amlin-trace items-center rounded-full border px-[1.15rem] py-[0.6rem] backdrop-blur-[6px]",
-    "font-inter text-sm font-semibold transition-all duration-300 ease-out",
+    "amlin-cta-fill inline-flex items-center rounded-full border px-[1.15rem] py-[0.6rem]",
+    "font-inter text-sm font-semibold",
     "hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2",
     onHero
-      ? "border-white/28 bg-white/14 text-white hover:border-[var(--amlin-accent)] hover:bg-white/22 focus-visible:ring-[var(--amlin-accent)]"
-      : "border-white/16 bg-black/35 text-white/90 hover:border-white/50 hover:text-white focus-visible:ring-white/60"
+      ? "border-white/35 text-white focus-visible:ring-[var(--amlin-accent)]"
+      : "border-white/22 text-white/90 focus-visible:ring-white/60"
   );
 
 function getMobileNavStyles(): { header: CSSProperties; nav: CSSProperties } {

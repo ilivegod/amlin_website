@@ -7,7 +7,7 @@ export function ServicesIntro() {
         <RevealTitle
           as="h1"
           lines={["Your Vision.", "Our Expertise."]}
-          className="font-polysans text-[clamp(3rem,7.5vw,5.75rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+          className="font-jakarta text-[clamp(3rem,7.5vw,5.75rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
           ariaLabel="Your Vision. Our Expertise."
         />
         <p className="mt-6 max-w-2xl font-inter text-[clamp(1rem,1.45vw,1.25rem)] leading-[1.65] text-white/60 md:mt-8">

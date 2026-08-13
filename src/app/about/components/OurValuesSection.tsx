@@ -100,7 +100,7 @@ function DesktopValueCard({
           animate={{ y: isHovered ? -8 : 0 }}
           transition={hoverSpring}
         >
-          <h3 className="font-polysans text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
+          <h3 className="font-jakarta text-2xl font-semibold tracking-[-0.02em] text-white md:text-3xl">
             {card.title}
           </h3>
         </motion.div>
@@ -140,7 +140,7 @@ export function OurValuesSection() {
         <RevealTitle
           as="h2"
           text="Our Values"
-          className="font-polysans text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+          className="font-jakarta text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
         />
         <p className="mt-6 max-w-2xl font-inter text-[clamp(1rem,1.35vw,1.2rem)] leading-[1.65] text-white/55">
           At the core of everything we do are the principles that guide our work,
@@ -173,7 +173,7 @@ export function OurValuesSection() {
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-5">
-              <h3 className="font-polysans text-2xl font-semibold text-white">
+              <h3 className="font-jakarta text-2xl font-semibold text-white">
                 {card.title}
               </h3>
               <p className="mt-2 font-inter text-sm leading-relaxed text-white/70">

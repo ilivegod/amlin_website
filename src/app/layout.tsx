@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
 import { Toaster } from "@/components/ui/sonner";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { SmoothScroll } from "./components/SmoothScroll";
-import localFont from "next/font/local";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,36 +14,25 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  style: "italic",
-});
-
-const polysans = localFont({
-  src: "../../public/fonts/PolySansNeutralWide.woff2",
-  variable: "--font-polysans",
+  variable: "--font-jakarta",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "amlin Technologies",
-  description: "amlinTechCo",
+  title: "Amlin Technologies",
+  description:
+    "Custom software, automation, and digital systems for healthcare, real estate, transport, and corporate teams.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
       <body>
         <SmoothScroll>
           <Navbar />
-
-          <main
-            className={`${inter.variable} ${playfair.variable} ${polysans.variable}`}
-          >
-            {children}
-          </main>
+          <main>{children}</main>
           <Footer />
         </SmoothScroll>
         <Toaster />

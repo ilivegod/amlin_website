@@ -1,7 +1,7 @@
 import Image from "next/image";
 
+import { ContactLink } from "@/components/ContactLink";
 import { RevealTitle } from "@/components/RevealTitle";
-import { AboutContactLink } from "./AboutContactLink";
 
 export function AboutIntro() {
   return (
@@ -10,7 +10,7 @@ export function AboutIntro() {
         <RevealTitle
           as="h1"
           lines={["Our Mission", "& Vision"]}
-          className="font-polysans text-[clamp(3rem,7.5vw,5.75rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+          className="font-jakarta text-[clamp(3rem,7.5vw,5.75rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
           ariaLabel="Our Mission and Vision"
         />
         <p className="mt-6 max-w-3xl font-inter text-[clamp(1rem,1.45vw,1.25rem)] leading-[1.65] text-white/60 md:mt-8">
@@ -19,13 +19,10 @@ export function AboutIntro() {
           set the global standard for digital transformation through intuitive,
           scalable solutions that put users first and inspire excellence.
         </p>
-        <AboutContactLink
-          href="#contact"
-          className="mt-8 inline-flex items-center gap-2 font-inter text-sm font-medium text-white/70 transition-colors hover:text-white"
-        >
+        <ContactLink className="mt-8 inline-flex items-center gap-2 font-inter text-sm font-medium text-white/70 transition-colors hover:text-white">
           Get in touch
           <span aria-hidden="true">&rarr;</span>
-        </AboutContactLink>
+        </ContactLink>
       </div>
 
       <div className="border-b work-grid-line py-8 md:py-12">

@@ -10,7 +10,7 @@ export function SolutionsThatWorkSection() {
         <RevealTitle
           as="h2"
           lines={["Solutions that work", "for our partners"]}
-          className="font-polysans text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
+          className="font-jakarta text-[clamp(2.25rem,5.4vw,4.25rem)] font-semibold leading-[1.02] tracking-[-0.03em]"
           ariaLabel="Solutions that work for our partners"
         />
         <p className="mt-6 max-w-2xl font-inter text-[clamp(1rem,1.35vw,1.2rem)] leading-[1.65] text-white/55">

@@ -138,7 +138,7 @@ export function Footer() {
 
         {/* right */}
         <div className="flex flex-col pt-16 md:items-center md:pt-0">
-          <div className="mt-5 flex w-1/2 flex-col space-y-4 md:mt-0 md:items-end">
+          <div className="mt-4 flex w-1/2 flex-col space-y-4 md:mt-0 md:items-end">
             <div className="flex flex-col items-start space-y-3 font-inter md:space-y-5">
               <h2 className="text-xl font-medium text-[#A3A3A3]">
                 Quick Links

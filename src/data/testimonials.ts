@@ -17,7 +17,7 @@ export const testimonials: Testimonial[] = [
     name: "CrossMed Team",
     role: "CrossMed EHR",
     quote:
-      "Amlin Technologies helped us turn a complex healthcare vision into a scalable digital platform. Their technical expertise, problem-solving approach, and understanding of healthcare workflows made them more than a development partner, they became a trusted technology partner.",
+      "Amlin Technologies helped us turn a complex healthcare vision into a scalable digital platform. Their technical expertise and problem-solving approach made them more than a development partner, they became a trusted technology partner.",
   },
   {
     name: "GCGM",

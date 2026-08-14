@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { Toaster } from "@/components/ui/sonner";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
@@ -24,12 +24,20 @@ export const metadata: Metadata = {
   title: "Amlin Technologies",
   description:
     "Custom software, automation, and digital systems for healthcare, real estate, transport, and corporate teams.",
+  appleWebApp: {
+    statusBarStyle: "black-translucent",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050505",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
-      <body>
+      <body className="bg-[#050505] text-white antialiased">
         <SmoothScroll>
           <Navbar />
           <main>{children}</main>

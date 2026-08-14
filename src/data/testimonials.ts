@@ -10,7 +10,7 @@ export const testimonials: Testimonial[] = [
     name: "Rosina Andor",
     role: "Tech Lead, Healthcare Partner",
     quote:
-      "Partnering with Amlin was a game-changer. In just six months, they helped us cut system downtime by 30% and doubled our automation capacity. Their team brought clarity, speed, and serious results.",
+      "Partnering with Amlin was a game-changer. In just six months, they helped us cut system downtime by 40% and doubled our automation capacity. Their team brought clarity, speed, and serious results.",
     image: "/photos/portrait-cheerful-black-woman.png",
   },
   {

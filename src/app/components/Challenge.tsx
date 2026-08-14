@@ -4,25 +4,28 @@ import { ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { useRef } from "react";
-import { motion } from "motion/react";
-import { useState } from "react";
+
+import { FollowingEyes } from "@/components/FollowingEyes";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+const contactSchema = z.object({
+  name: z.string().min(3, { message: "Please enter a valid name" }),
+  email: z.string().email().min(3, { message: "Please enter a valid email" }),
+  projectDetails: z
+    .string()
+    .min(3, { message: "Please enter your project details" }),
+});
+
+type FormValues = z.infer<typeof contactSchema>;
+
+const fieldClassName =
+  "border-0 border-b border-white/20 rounded-none bg-transparent px-0 py-4 text-white placeholder:text-white/35 text-base focus-visible:border-white/60 focus-visible:ring-0";
 
 function Challenge() {
-  const [, setStatus] = useState("");
-
-  const challengeRef = useRef<HTMLDivElement | null>(null);
-  const contactSchema = z.object({
-    name: z.string().min(3, { message: "Please enter a valid name" }),
-    email: z.string().email().min(3, { message: "Please enter a valid email" }),
-    projectDetails: z
-      .string()
-      .min(3, { message: "Please enter your project details" }),
-  });
-
-  type FormValues = z.infer<typeof contactSchema>;
+  const contactRef = useRef<HTMLDivElement | null>(null);
 
   const form = useForm({
     defaultValues: {
@@ -39,34 +42,20 @@ function Challenge() {
         const res = await fetch("/api/send-email", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          // body: JSON.stringify({
-          //   name: value.name,
-          //   email: value.email,
-          //   message: value.projectDetails,
-          // }),
           body: JSON.stringify(value),
         });
 
         const result = await res.json();
-        // if (!res.ok) {
-        //   throw new Error("Something went wrong! Try again ");
-        // }
-        if (result.success) {
-          setStatus("✅ Message sent!");
-          form.reset();
-        } else {
-          setStatus("❌ Failed to send. Check server logs.");
+
+        if (!res.ok || !result.success) {
+          toast.warning("Something went wrong! Try again");
+          return;
         }
 
+        form.reset();
         toast.success(
           "Thanks for contacting us! A member of our team will be in touch shortly."
         );
-        form.reset();
-
-        // toast.success(
-        //   "Thanks for contacting us! A member of our team will be in touch shortly."
-        // );
-        // form.reset();
       } catch (error) {
         console.error(error);
         toast.warning("Something went wrong! Try again");
@@ -76,125 +65,94 @@ function Challenge() {
 
   return (
     <section
-      id="challenge"
-      ref={challengeRef}
-      className="relative flex flex-col md:px-0 px-3 md:pt-0 pt-16 items-center md:justify-center min-h-[80vh] md:pb-0  bg-white"
+      id="contact"
+      ref={contactRef}
+      className="relative bg-[#050505] px-[var(--hero-gutter)] py-20 font-inter md:py-28"
     >
-      <div className="md:flex block md:w-2/3">
-        <div className=" md:w-4/6 flex flex-col gap-6">
-          <p className={`font-semibold  md:text-6xl text-3xl`}>
-            We&apos;re l
-            <motion.button
-              initial={{ scale: 0 }}
-              animate={{
-                scale: 1,
-                rotate: 360,
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 1,
-                repeatDelay: 1.5,
-                type: "spring",
-                bounce: 0.5,
-              }}
-            >
-              👀
-            </motion.button>
-            king for <br className="md:block hidden" /> new challenges
-          </p>
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-12 border-t work-grid-line pt-12 md:grid-cols-[1.15fr_0.85fr] md:gap-16 md:pt-16">
+        <div className="flex flex-col gap-6">
+          <h2 className="font-jakarta text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-[#b0b0b0]">
+            <span className="inline-flex flex-wrap items-center">
+              We&apos;re l
+              <FollowingEyes />
+              king for
+            </span>{" "}
+            <span className="block">new challenges</span>
+          </h2>
 
-          <p
-            className={`text-[#5E646F] font-inter font-medium md:text-base text-sm`}
-          >
-            We thrive on solving complex problems and turning big ideas into
-            bold <br className="md:block hidden" /> results. If you’re
-            navigating uncharted territory or aiming for something{" "}
-            <br className="md:block hidden" /> audacious, we’d love to help you
-            make it happen.
+          <p className="max-w-xl font-inter text-sm leading-relaxed text-white/55 md:text-base">
+            We thrive on solving complex problems and turning big ideas into bold
+            results. If you&apos;re navigating uncharted territory or aiming for
+            something audacious, we&apos;d love to help you make it happen.
           </p>
         </div>
 
-        <div className=" md:w-2/6 md:pt-0 pt-28 flex flex-col ">
+        <div>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               e.stopPropagation();
               form.handleSubmit();
             }}
+            className="space-y-5"
           >
-            <div className="space-y-4  ">
-              <form.Field name="name">
-                {(field) => {
-                  return (
-                    <div className="relative">
-                      <Input
-                        id="name"
-                        name="name"
-                        type="name"
-                        placeholder="Name"
-                        value={field.state.value}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                        className="bg-transparent border-0 border-b border-gray-300 rounded-none px-0 py-4 text-black placeholder:text-gray-800 text-lg focus-visible:ring-0 focus-visible:border-gray-800"
-                        required
-                      />
-                    </div>
-                  );
-                }}
-              </form.Field>
+            <form.Field name="name">
+              {(field) => (
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  className={fieldClassName}
+                  required
+                />
+              )}
+            </form.Field>
 
-              <form.Field name="email">
-                {(field) => {
-                  return (
-                    <div className="relative">
-                      <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                        placeholder="E-mail"
-                        className="bg-transparent text-black border-0 border-b border-gray-300 rounded-none px-0 py-4  placeholder:text-gray-800 text-lg focus-visible:ring-0 focus-visible:border-gray-400"
-                      />
-                    </div>
-                  );
-                }}
-              </form.Field>
+            <form.Field name="email">
+              {(field) => (
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder="E-mail"
+                  className={fieldClassName}
+                />
+              )}
+            </form.Field>
 
-              <form.Field name="projectDetails">
-                {(field) => {
-                  return (
-                    <div className="relative">
-                      <Input
-                        id="projectDetails"
-                        type="text"
-                        name="projectDetails"
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(e) => field.handleChange(e.target.value)}
-                        placeholder="Project Details"
-                        className="bg-transparent border-0 border-b border-gray-300 rounded-none px-0 py-4 text-black placeholder:text-gray-800 text-lg focus-visible:ring-0 focus-visible:border-gray-400"
-                      />
-                    </div>
-                  );
-                }}
-              </form.Field>
-            </div>
+            <form.Field name="projectDetails">
+              {(field) => (
+                <Textarea
+                  id="projectDetails"
+                  name="projectDetails"
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  placeholder="Project details"
+                  rows={6}
+                  className={`${fieldClassName} min-h-[9rem] resize-y py-4`}
+                />
+              )}
+            </form.Field>
 
             <form.Subscribe
               selector={(state) => [state.canSubmit, state.isSubmitting]}
             >
               {([canSubmit, isSubmitting]) => (
-                <div className="flex justify-end mt-5">
+                <div className="flex justify-end pt-2">
                   <Button
-                    // loading={isSubmitting}
                     type="submit"
                     disabled={!canSubmit || isSubmitting}
-                    className="  bg-gradient-to-r py-5  from-[#7A5FFF] to-[#04C9A8] rounded-4xl   hover:cursor-pointer"
+                    className="amlin-cta-fill rounded-full border border-white/25 px-6 py-5 font-inter text-sm font-semibold text-white"
                   >
-                    {isSubmitting ? "submitting..." : "Get in touch"}
-
-                    <ChevronRight />
+                    {isSubmitting ? "Submitting..." : "Get in touch"}
+                    <ChevronRight className="ml-1 h-4 w-4" />
                   </Button>
                 </div>
               )}

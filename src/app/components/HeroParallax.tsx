@@ -24,7 +24,7 @@ export function HeroParallax({ background, scrim, children }: HeroParallaxProps)
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
   return (
-    <section ref={ref} className="hero relative h-dvh overflow-hidden">
+    <section ref={ref} className="hero relative h-dvh min-h-dvh overflow-hidden max-md:h-svh max-md:min-h-svh">
       {reduceMotion ? (
         <>
           <div className="absolute inset-0">{background}</div>

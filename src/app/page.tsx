@@ -29,10 +29,10 @@ export default function Home() {
           />
         }
       >
-        <div className="mx-auto flex h-full w-full flex-col px-[var(--hero-gutter)] pb-10 pt-[var(--nav-h)]">
+        <div className="mx-auto flex h-full w-full flex-col px-[var(--hero-gutter)] pb-6 pt-[var(--nav-h)] md:pb-10">
           <div className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center justify-center text-center">
             <p
-              className="amlin-fade mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 font-inter text-[0.6875rem] font-normal uppercase tracking-[0.18em] text-white/[0.6]"
+              className="amlin-fade mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 font-inter text-[0.6875rem] font-normal uppercase tracking-[0.18em] text-white/[0.55]"
               style={{ animationDelay: "1.05s" }}
             >
               <span
@@ -77,7 +77,7 @@ export default function Home() {
                 </span>
               </Link>
 
-              <ContactLink className="amlin-cta-fill inline-flex items-center rounded-full border border-white/25 px-[1.5rem] py-[0.85rem] font-inter text-sm font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]">
+              <ContactLink className="amlin-cta-fill hidden items-center rounded-full border border-white/25 px-[1.5rem] py-[0.85rem] font-inter text-sm font-medium text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:inline-flex">
                 Talk to our team
               </ContactLink>
             </div>

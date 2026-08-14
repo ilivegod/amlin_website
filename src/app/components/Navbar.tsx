@@ -103,7 +103,7 @@ const mobileNavLinkClass = (isActive: boolean) =>
 
 const ctaClass = (onHero: boolean) =>
   clsx(
-    "amlin-cta-fill inline-flex items-center rounded-full border px-[1.15rem] py-[0.6rem]",
+    "amlin-cta-fill items-center rounded-full border px-[1.15rem] py-[0.6rem]",
     "font-inter text-sm font-semibold",
     "hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2",
     onHero
@@ -184,16 +184,19 @@ export function Navbar() {
     pathname === "/services" ||
     pathname === "/solutions" ||
     pathname === "/about";
-  const isScrollNav = (isHome || isOverlayPage) && !isMobile;
+  const isOverlayNav = isHome || isOverlayPage;
+  const isScrollNav = isOverlayNav && !isMobile;
   const progress = isScrollNav ? scrollProgress : isMobile ? 0 : 1;
   const isOnHero = isHome && progress < 0.55;
   const useHeroChrome = isOnHero || (isOverlayPage && progress < 0.55);
   const { header: headerStyle, nav: navStyle } = isMobile
     ? getMobileNavStyles()
     : getNavStyles(progress, isOnHero, isOverlayPage);
+  const showMobileLogoPill =
+    isMobile && !menuOpen && isOverlayNav && scrollProgress > 0.12;
 
   useEffect(() => {
-    if (!isScrollNav) {
+    if (!isOverlayNav) {
       setScrollProgress(1);
       return;
     }
@@ -205,7 +208,7 @@ export function Navbar() {
     updateScrollProgress();
     window.addEventListener("scroll", updateScrollProgress, { passive: true });
     return () => window.removeEventListener("scroll", updateScrollProgress);
-  }, [isScrollNav]);
+  }, [isOverlayNav]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -238,7 +241,13 @@ export function Navbar() {
           <div className="flex shrink-0 items-center justify-start">
             <Link
               href="/"
-              className="rounded-sm hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]"
+              className={clsx(
+                "hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)]",
+                "transition-[background-color,box-shadow,padding,border-color,border-radius] duration-300 ease-out",
+                showMobileLogoPill
+                  ? "rounded-full border border-white/10 bg-black/35 px-4 py-2.5 shadow-[0_6px_20px_rgba(0,0,0,0.22)] backdrop-blur-md"
+                  : "rounded-sm"
+              )}
               onClick={(e) => handleHomeClick(e, pathname, lenis, closeMenu)}
             >
               <Image
@@ -300,7 +309,13 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMenuOpen((open) => !open)}
-              className="relative z-[70] flex h-10 w-10 shrink-0 items-center justify-center rounded-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:hidden"
+              className={clsx(
+                "relative z-[70] flex h-10 w-10 shrink-0 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--amlin-accent)] md:hidden",
+                "transition-[background-color,box-shadow,border-color,border-radius] duration-300 ease-out",
+                showMobileLogoPill
+                  ? "rounded-full border border-white/10 bg-black/35 shadow-[0_6px_20px_rgba(0,0,0,0.22)] backdrop-blur-md"
+                  : "rounded-sm"
+              )}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
             >

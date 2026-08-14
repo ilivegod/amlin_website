@@ -41,8 +41,8 @@ export function Footer() {
   };
 
   return (
-    <div className="relative mx-auto flex min-h-screen flex-col border-t border-[#2a2a2a] bg-[#050505] px-4 pt-14 text-white md:items-center md:px-0 md:pt-28">
-      <div className="grid grid-cols-1 md:w-3/4 md:grid-cols-3">
+    <div className="relative mx-auto flex flex-col overflow-hidden border-t border-[#2a2a2a] bg-[#050505] px-4 pt-14 text-white md:min-h-screen md:items-center md:px-0 md:pt-28">
+      <div className="relative z-10 grid grid-cols-1 md:w-3/4 md:grid-cols-3">
         {/* left side */}
         <div className="flex flex-col gap-6">
           <Image
@@ -62,10 +62,12 @@ export function Footer() {
 
           <div className="flex flex-col gap-3 font-inter">
             <div className="flex items-center gap-2">
-              <p className="text-xl md:text-2xl">{footerEmail}</p>
+              <p className="text-xl break-all md:text-2xl md:break-normal">
+                {footerEmail}
+              </p>
               <Copy
                 onClick={handleCopy}
-                className="h-4 w-4 cursor-pointer text-gray-200 hover:text-white"
+                className="h-4 w-4 shrink-0 cursor-pointer text-gray-200 hover:text-white"
               />
               {copied && (
                 <span className="text-sm text-green-400">Copied!</span>
@@ -111,17 +113,18 @@ export function Footer() {
         </div>
 
         {/* center */}
-        <div className="flex flex-col gap-6 pt-16 md:pt-0">
+        <div className="flex flex-col gap-6 pt-14 md:pt-0">
           <div className="flex flex-col gap-3">
             <p className="font-jakarta text-4xl font-semibold md:text-5xl">
               Stay <br className="hidden md:block" /> connected
             </p>
-            <p className="font-inter text-lg font-medium text-[#5E646F]">
-              Join our newsletter and stay updated <br /> on the latest trends
-              in digital design
+            <p className="font-inter text-base font-medium text-[#5E646F] md:text-lg">
+              Join our newsletter and stay updated{" "}
+              <br className="hidden sm:block" />
+              on the latest trends in digital design
             </p>
           </div>
-          <div className="relative mx-auto w-full">
+          <div className="relative w-full">
             <div className="relative flex items-center border-b-2 border-white py-4">
               <span className="font-inter text-lg text-gray-700">
                 Coming Soon!
@@ -137,8 +140,8 @@ export function Footer() {
         </div>
 
         {/* right */}
-        <div className="flex flex-col pt-16 md:items-center md:pt-0">
-          <div className="mt-4 flex w-1/2 flex-col space-y-4 md:mt-0 md:items-end">
+        <div className="flex flex-col pt-14 md:items-center md:pt-0">
+          <div className="flex w-full flex-col space-y-4 md:mt-0 md:w-1/2 md:items-end">
             <div className="flex flex-col items-start space-y-3 font-inter md:space-y-5">
               <h2 className="text-xl font-medium text-[#A3A3A3]">
                 Quick Links
@@ -183,11 +186,15 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-1/2 w-5/6 -translate-x-1/2">
+      {/* Mobile: wordmark sits below content. Desktop: pinned to bottom. */}
+      <div
+        className="pointer-events-none relative mt-10 w-[110%] -translate-x-[5%] select-none md:absolute md:bottom-0 md:left-1/2 md:mt-0 md:w-5/6 md:-translate-x-1/2"
+        aria-hidden="true"
+      >
         <Image
           src="/svg/amlin.svg"
-          alt="amlin text"
-          className="w-full"
+          alt=""
+          className="w-full opacity-35 md:opacity-100"
           width={1000}
           height={1000}
         />
